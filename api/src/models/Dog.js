@@ -14,40 +14,40 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-    height: {
+    min_height: {
       type: DataTypes.FLOAT(2),
       allowNull: false,
     },
-    // min_height: {
-    //   type: DataTypes.FLOAT(2),
-    //   allowNull: false,
-    // },
-    weight: {
+    max_height: {
+      type: DataTypes.FLOAT(2),
+      allowNull: false,
+    },
+    min_weight: {
       type: DataTypes.FLOAT(3),
       allowNull: false,
     },
-    // min_weight: {
-    //   type: DataTypes.FLOAT(3),
-    //   allowNull: false,
-    // },
-    life_span: {
+    max_weight: {
+      type: DataTypes.FLOAT(3),
+      allowNull: false,
+    },
+    min_life_span: {
       type: DataTypes.INTEGER,
     },
-    // max_life_span: {
-    //   type: DataTypes.INTEGER,
-    // }
-  });
+    max_life_span: {
+      type: DataTypes.INTEGER,
+    },
+  }, { timestamps: false });
 
   sequelize.define('Temperamento', {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true
+      defaultValue: DataTypes.UUIDV4,
     },
     name: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
-  });
+  }, { timestamps: false });
 };
