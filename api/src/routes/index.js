@@ -22,16 +22,17 @@ router.get('/dogs', async (req, res) => {
             return {
                 id: dog.id,
                 name: dog.name,
-                temperament: dog.temperament,
-                weight: dog.weight.imperial
+                temperament: [dog.temperament],
+                min_weight: dog.weight.imperial.split(' - ')[0],
+                max_weight: dog.weight.imperial.split(' - ')[1]
             }
         })
         const response_db = await Raza.findAll({
-            attributes: ['id', 'name', 'weight'],
+            attributes: ['id', 'name', 'min_weight', 'max_weight'],
             include: Temperamento,
             where: {
                 name: {
-                    [Op.iLike]: `%${raza}`            
+                    [Op.iLike]: `%${raza}%`            
                 }
             }
         })
@@ -46,15 +47,26 @@ router.get('/dogs', async (req, res) => {
     } else {
         const response_api = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
         const dogs_api = response_api.data.map((dog) => {
+            const aux = []
+            if (dog.temperament) {
+                dog.temperament.split(', ').forEach( e => aux.push({ name: e}) )
+            }
             return {
                 id: dog.id,
                 name: dog.name,
-                temperament: dog.temperament,
-                weight: dog.weight.imperial
+                Temperamentos: aux, //dog.temperament ? dog.temperament.split(', ') : [],
+                min_weight: dog.weight.imperial.split(' - ')[0],
+                max_weight: dog.weight.imperial.split(' - ')[1]
             }
         })
         const dogs_db = await Raza.findAll({
-            attributes: ['id', 'name', 'max_weight', 'min_weight']
+            include: [{
+                model: Temperamento,
+                through: {
+                    attributes: []
+                }
+            }],
+            attributes: ['id', 'name', 'min_weight', 'max_weight']
         })
         const response = dogs_api.concat(dogs_db)
         res.status(200).json(response)
