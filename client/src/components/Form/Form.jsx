@@ -31,12 +31,24 @@ export default function Form() {
         image: ' ',
     })
     
-    // On envery change in input fields performs state updates and validates input data from user
+    // On every change in input fields performs state updates and validates input data from user
     const handleChange = (e) => {
-        setBreed({
-            ...breed,
-            [e.target.name]: e.target.name === 'name' ? e.target.value.slice(0, 50) : e.target.value.replace('-', '') // limit name to 50 chars and replaces negative sign in inputs
-        })
+        if (e.target.name === 'name') {
+            setBreed({
+                ...breed,
+                [e.target.name]: e.target.value.slice(0, 50)
+            })
+        } else if (e.target.name === 'image') {
+            setBreed({
+                ...breed,
+                [e.target.name]: e.target.value 
+            })
+        } else {
+            setBreed({
+                ...breed,
+                [e.target.name]: e.target.value.replace('-', '') 
+            })
+        }
         validate(e)
     }
     
@@ -64,8 +76,8 @@ export default function Form() {
         }
     }
 
-    // This function validates min and max input fields. Min can't be greater than max and empty fields are not allowed.
-    // Also, at first it only runs if there are values in both input fields. Finally, sets error message to an empty string meaning everything is ok.
+    // Performs validations on maxs and mins fields
+
     const validateMaxAndMin = (minRef, maxRef, input) => {
             if (minRef.current.value === '' && maxRef.current.value === '') {
                 setErrorMessage({

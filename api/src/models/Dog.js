@@ -36,6 +36,9 @@ module.exports = (sequelize) => {
     max_life_span: {
       type: DataTypes.INTEGER,
     },
+    image: {
+      type: DataTypes.INTEGER,
+    }
   }, { timestamps: false });
 
   sequelize.define('Temperamento', {
