@@ -6,20 +6,20 @@ export const GET_BREED = 'GET_BREED'
 
 export function getAllBreeds() {
     return async function(dispatch) {
-        const res = await axios.get('localhost:3001/dogs')
+        const res = await axios.get('http://localhost:3001/dogs')
         return dispatch({
             type: GET_ALL_BREEDS,
-            payload: res
+            payload: res.data
         })
     }
 }
 
 export function getBreed(id) {
     return async function(dispatch) {
-        const res = await axios.get(`localhost:3001/dogs/${id}`)
+        const res = await axios.get(`http://localhost:3001/dogs/${id}`)
         return dispatch({
             type: GET_BREED,
-            payload: res
+            payload: res.data
         })
     }
 }

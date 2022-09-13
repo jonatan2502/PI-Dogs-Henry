@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './components/Home/Home';
 import Form from './components/Form/Form';
 import NavBar from './components/NavBar/NavBar';
+import DogDetail from './components/DogDetail/DogDetail';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Route path='/' component={LandingPage} exact></Route>
         <Route path='/home' component={Home} exact></Route>
         <Route path='/createBreed' component={Form} exact></Route>
-        <Route path='/' component={NavBar}></Route>
+        <Route path='/breeds/:id' component={DogDetail}></Route>
+        {/* <Route path='*' component={NavBar}></Route> */}
       </Switch>
     </div>
   );

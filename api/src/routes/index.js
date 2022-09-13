@@ -23,7 +23,7 @@ router.get('/dogs', async (req, res) => {
                 return {
                     id: dog.id,
                     name: dog.name,
-                    temperament: [dog.temperament],
+                    Temperamentos: [dog.temperament],
                     min_weight: dog.weight.imperial.split(' - ')[0],
                     max_weight: dog.weight.imperial.split(' - ')[1],
                     image: `https://cdn2.thedogapi.com/images/${reference_image_id}.jpg`
@@ -108,8 +108,8 @@ router.get('/dogs/:idRaza', async (req, res) => {
                 max_weight: aux.weight.imperial.split(' - ')[1],
                 min_height: aux.height.imperial.split(' - ')[0],
                 max_height: aux.height.imperial.split(' - ')[1],
-                min_lifespan: aux.life_span.split(' - ')[0],
-                max_lifespan: aux.life_span.split(' - ')[1].split(' ')[0],
+                min_life_span: aux.life_span.split(' - ')[0],
+                max_life_span: aux.life_span.split(' - ')[1].split(' ')[0],
                 image: aux.image.url,
 
             }

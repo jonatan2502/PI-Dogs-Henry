@@ -1,0 +1,7 @@
+.CardContainer {
+    border: 1px solid black;
+}
+
+.CardImage {
+    max-width: 250px;
+}
