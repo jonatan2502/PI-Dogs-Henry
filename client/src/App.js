@@ -9,6 +9,7 @@ import DogDetail from './components/DogDetail/DogDetail';
 function App() {
   return (
     <div className="App">
+      <NavBar></NavBar>
       <Switch>
         <Route path='/' component={LandingPage} exact></Route>
         <Route path='/home' component={Home} exact></Route>

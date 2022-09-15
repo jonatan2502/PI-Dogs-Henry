@@ -116,6 +116,7 @@ router.get('/dogs/:idRaza', async (req, res) => {
             return response ? res.status(200).json(dog) : res.status(404).json({'msg': `Sorry, your search for ID: <h2>${idRaza}</h2> did not return any results.`})
         }
     } catch (error) {
+        console.log(error)
         res.status(404).json({'msg': `Oops! Something went wrong.`})
     }
 })

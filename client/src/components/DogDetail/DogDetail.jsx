@@ -2,24 +2,29 @@ import { useParams } from 'react-router-dom'
 import Styles from './DogDetails.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getBreed } from '../../redux/actions'
+import { clearDetails, getBreed } from '../../redux/actions'
+import defaultImage from '../../assets/img/default_img.jpg'
+import Loader from '../Loader/Loader'
+
 
 
 export default function DogDetail() {
     const dispatch = useDispatch()
-    let breedDetail = useSelector( (store) => store.breed)
+    let breedDetail = useSelector( (store) => store.breedDetail)
     let { id } = useParams()
 
     useEffect(() => {
         dispatch(getBreed(id))
-    }, [])
+        return () => {
+            dispatch(clearDetails())
+        }
+    }, [id])
 
-
-    console.log(breedDetail)
-    return (
+    if (!breedDetail) return <Loader></Loader>
+    else return (
         <div>
             <h1>Dog details</h1>
-            <img className={Styles.CardImage} src={breedDetail.image ? breedDetail.image : 'https://i.pinimg.com/564x/c6/b9/c9/c6b9c91cf636c86496cd9886cc8c6c20.jpg'} alt='Dog'></img>
+            <img className={Styles.CardImage} src={breedDetail.image ? breedDetail.image : defaultImage} alt='Dog'></img>
             <p>Name: {breedDetail.name}</p>
             <p>Weight: {`${breedDetail.min_weight} - ${breedDetail.max_weight} lb`}</p>
             <p>Height: {`${breedDetail.min_height} - ${breedDetail.max_height} in`}</p>

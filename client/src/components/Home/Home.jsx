@@ -4,7 +4,8 @@ import axios from 'axios'
 import NavBar from "../NavBar/NavBar"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { getAllBreeds } from "../../redux/actions"
+import { getAllBreeds, getFilteredBreeds, sortBy } from "../../redux/actions"
+import Options from "../Options/Options"
 
 
 // const dogs = fetch('localhost:3001/dogs')
@@ -14,26 +15,38 @@ import { getAllBreeds } from "../../redux/actions"
 export default function Home() {
     
     const dispatch = useDispatch()
-    const breeds = useSelector((store) => store.breeds)
+    const breeds = useSelector(store => store.breeds)
     useEffect((() => {
-        dispatch(getAllBreeds()) //Dispatch getAllBreeds whe component renders
+        dispatch(getAllBreeds()) //Dispatch getAllBreeds when component renders
     }), [])
-    //console.log(breeds[175])
+
+    const handleOrderBy = function(event) {
+        const order = event.target.value
+        dispatch(sortBy(order, breeds))
+        if (order === 'asc') breeds.sort((a, b) => a.name.localeCompare(b.name))
+        else breeds.sort((a, b) => b.name.localeCompare(a.name))
+    }
+
+    const handleFilter = function(event) {
+        const temp = event.target.value
+        dispatch(getFilteredBreeds(temp))
+    }
+
     return (
         <div>
-            <NavBar></NavBar>
+            <Options handleOrderBy={handleOrderBy} handleFilter={handleFilter}></Options>
             {
                 breeds.map((breed) =>
-                <DogCard
-                    key={breed.id}
-                    id={breed.id}
-                    name={breed.name}
-                    image={breed.image}
-                    minWeight={breed.min_weight}
-                    maxWeight={breed.max_weight}
-                    temperament={breed.Temperamentos.map((e)=> e.name)}
+                    <DogCard
+                        key={breed.id}
+                        id={breed.id}
+                        name={breed.name}
+                        image={breed.image}
+                        minWeight={breed.min_weight}
+                        maxWeight={breed.max_weight}
+                        temperament={breed.Temperamentos.map((e)=> e.name)}
                     >
-                </DogCard> 
+                    </DogCard> 
                 )
             }
         </div>
