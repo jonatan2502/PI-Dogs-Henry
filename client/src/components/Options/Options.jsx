@@ -14,24 +14,24 @@ export default function Options(props) {
 
     return (
         <div>
-            <label>Order by: </label>
-            <select name='orderBy' onChange={(e)=>props.handleOrderBy(e)}>
-                <optgroup label='Name'>
-                    <option value='asc'>A - Z</option>
-                    <option value='desc'>Z - A</option>
-                </optgroup>
-                <optgroup label='Weight'>
-                    <option value='asc'>Min first</option>
-                    <option value='desc'>Max first</option>
-                </optgroup>
-            </select>
-            <label>Temperament: </label>
+            <label>Choose temperament: </label>
             <select name='filterBy' onChange={(e)=>props.handleFilter(e)}>
                 <option value=''>All</option>
                 {
                     temperaments.map(e => <option key={e} value={e}>{e}</option>)
                 }
                 
+            </select>
+            <label>Order by: </label>
+            <select name='orderBy' onChange={(e)=>props.handleOrderBy(e)}>
+                <optgroup label='Name'>
+                    <option value='name_asc'>A - Z</option>
+                    <option value='name_desc'>Z - A</option>
+                </optgroup>
+                <optgroup label='Weight'>
+                    <option value='weight_asc'>Min first</option>
+                    <option value='weight_desc'>Max first</option>
+                </optgroup>
             </select>
         </div>
     )

@@ -3,38 +3,65 @@ import styles from "./Home.module.css"
 import axios from 'axios'
 import NavBar from "../NavBar/NavBar"
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect } from "react"
-import { getAllBreeds, getFilteredBreeds, sortBy } from "../../redux/actions"
+import { useEffect, useRef } from "react"
+import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments, searchByName } from "../../redux/actions"
 import Options from "../Options/Options"
-
-
-// const dogs = fetch('localhost:3001/dogs')
-// console.log(dogs)
 
 
 export default function Home() {
     
     const dispatch = useDispatch()
+    const temperaments = useSelector((state) => state.temperaments).sort()
     const breeds = useSelector(store => store.breeds)
+    const orderRef = useRef()
+    // let breeds = useSelector(store => store.orderedBreeds)
     useEffect((() => {
-        dispatch(getAllBreeds()) //Dispatch getAllBreeds when component renders
+        dispatch(getAllBreeds())
     }), [])
-
+    
+    useEffect(() => {
+        dispatch(getAllTemperaments())
+    }, [])
+    
     const handleOrderBy = function(event) {
         const order = event.target.value
-        dispatch(sortBy(order, breeds))
-        if (order === 'asc') breeds.sort((a, b) => a.name.localeCompare(b.name))
-        else breeds.sort((a, b) => b.name.localeCompare(a.name))
+        dispatch(orderBy(order, breeds))
     }
-
+    
     const handleFilter = function(event) {
         const temp = event.target.value
-        dispatch(getFilteredBreeds(temp))
+        //const order = orderRef.current.value
+        dispatch(getFilteredBreeds(temp, breeds))
+        // dispatch(orderBy(orderRef.current.value, breeds)) //Dispatch getAllBreeds when component renders
+        orderRef.current.value = 'name_asc'
+        
+        // breeds = orderBreeds
     }
 
     return (
         <div>
-            <Options handleOrderBy={handleOrderBy} handleFilter={handleFilter}></Options>
+            {/* <Options handleOrderBy={handleOrderBy} handleFilter={handleFilter}></Options> */}
+            <div>
+                <label>Choose temperament: </label>
+                <select name='filterBy' onChange={(e)=> handleFilter(e)}>
+                    <option value=''>All</option>
+                    {
+                        temperaments.map(e => <option key={e} value={e}>{e}</option>)
+                    }
+                    
+                </select>
+                <label>Order by: </label>
+                <select name='orderBy' onChange={(e)=> handleOrderBy(e)} ref={orderRef}>
+                    <optgroup label='Name'>
+                        <option value='name_asc'>A - Z</option>
+                        <option value='name_desc'>Z - A</option>
+                    </optgroup>
+                    <optgroup label='Weight'>
+                        <option value='weight_asc'>Min first</option>
+                        <option value='weight_desc'>Max first</option>
+                    </optgroup>
+                </select>
+            </div>
             {
                 breeds.map((breed) =>
                     <DogCard

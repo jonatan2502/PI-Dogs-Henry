@@ -18,15 +18,24 @@ router.get('/dogs', async (req, res) => {
         const raza = req.query.name
         //console.log('raza')
         if (raza) {
-            const response_api = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${raza}&api_key=${API_KEY}`)
-            const dogs_api = response_api.data.map((dog) => {
+            // const response_api = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${raza}&api_key=${API_KEY}`)
+            const raw = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+            const regex = new RegExp(raza.toLowerCase())
+            // console.log(regex)
+            const response_api = raw.data.filter( e => regex.test(`${e.name.toLowerCase()}`))
+            // console.log(response_api)
+            const dogs_api = response_api.map((dog) => {
+                const aux = []
+                if (dog.temperament) {
+                    dog.temperament.split(', ').forEach( e => aux.push({ name: e}) )
+                }
                 return {
                     id: dog.id,
                     name: dog.name,
-                    Temperamentos: [dog.temperament],
-                    min_weight: dog.weight.imperial.split(' - ')[0],
-                    max_weight: dog.weight.imperial.split(' - ')[1],
-                    image: `https://cdn2.thedogapi.com/images/${reference_image_id}.jpg`
+                    Temperamentos: aux, //dog.temperament ? dog.temperament.split(', ') : [],
+                    min_weight: dog.weight.imperial.split(' - ').length === 2 ? dog.weight.imperial.split(' - ')[0] : dog.weight.imperial,
+                    max_weight: dog.weight.imperial.split(' - ').length === 2 ? dog.weight.imperial.split(' - ')[1] : dog.weight.imperial,
+                    image: dog.reference_image_id ? `https://cdn2.thedogapi.com/images/${dog.reference_image_id}.jpg` : '../../assets/img/default_img.jpg'
                 }
             })
             const response_db = await Raza.findAll({
@@ -40,7 +49,7 @@ router.get('/dogs', async (req, res) => {
             })
 
             const response = response_db.concat(dogs_api)
-
+            
             if (response.length) {
                 res.status(200).json(response)
             } else {
@@ -57,8 +66,8 @@ router.get('/dogs', async (req, res) => {
                     id: dog.id,
                     name: dog.name,
                     Temperamentos: aux, //dog.temperament ? dog.temperament.split(', ') : [],
-                    min_weight: dog.weight.imperial.split(' - ')[0],
-                    max_weight: dog.weight.imperial.split(' - ')[1],
+                    min_weight: dog.weight.imperial.split(' - ').length === 2 ? dog.weight.imperial.split(' - ')[0] : dog.weight.imperial,
+                    max_weight: dog.weight.imperial.split(' - ').length === 2 ? dog.weight.imperial.split(' - ')[1] : dog.weight.imperial,
                     image: dog.image.url
                 }
             })
@@ -75,6 +84,7 @@ router.get('/dogs', async (req, res) => {
             res.status(200).json(response)
         }
     } catch (error) {
+        console.log(error)
         res.status(404).json({'msg': `Oops! Something went wrong.`})
     }
     })
@@ -97,6 +107,7 @@ router.get('/dogs/:idRaza', async (req, res) => {
             // console.log(response)
             const aux = response.data.find(e => e.id == idRaza)
             const temperaments = []
+            // console.log(aux)
             if (aux.temperament) {
                 aux.temperament.split(', ').forEach( e => temperaments.push({ name: e}) )
             }
@@ -104,12 +115,12 @@ router.get('/dogs/:idRaza', async (req, res) => {
                 id: aux.id,
                 name: aux.name,
                 Temperamentos: temperaments, //aux.temperament ? aux.temperament.split(', ') : [],
-                min_weight: aux.weight.imperial.split(' - ')[0],
-                max_weight: aux.weight.imperial.split(' - ')[1],
-                min_height: aux.height.imperial.split(' - ')[0],
-                max_height: aux.height.imperial.split(' - ')[1],
-                min_life_span: aux.life_span.split(' - ')[0],
-                max_life_span: aux.life_span.split(' - ')[1].split(' ')[0],
+                min_weight: aux.weight.imperial.split(' - ').length === 2 ? aux.weight.imperial.split(' - ')[0] : aux.weight.imperial,
+                max_weight: aux.weight.imperial.split(' - ').length === 2 ? aux.weight.imperial.split(' - ')[1] : aux.weight.imperial,
+                min_height: aux.height.imperial.split(' - ').length === 2 ? aux.height.imperial.split(' - ')[0] : aux.height.imperial,
+                max_height: aux.height.imperial.split(' - ').length === 2 ? aux.height.imperial.split(' - ')[1] : aux.height.imperial,
+                min_life_span: aux.life_span.split(' - ').length === 2 ? aux.life_span.split(' - ')[0] : aux.life_span.replace(' years', ''),
+                max_life_span: aux.life_span.split(' - ').length === 2 ? aux.life_span.split(' - ')[0] : aux.life_span.replace(' years', ''),
                 image: aux.image.url,
 
             }

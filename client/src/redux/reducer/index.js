@@ -4,12 +4,16 @@ import {
     GET_ALL_TEMPERAMENTS, 
     GET_BREED, 
     GET_FILTERED_BREEDS,
-    SORT_BY} from "../actions"
+    ORDER_BY,
+    SEARCH_BY_NAME
+    } from "../actions"
 
 const initialState = {
     breeds: [],
     breedDetail: [],
-    temperaments: []
+    temperaments: [],
+    orderedBreeds: [],
+    foundByName: [],
 }
 
 const rootReducer = ( state = initialState, action) => {
@@ -37,12 +41,17 @@ const rootReducer = ( state = initialState, action) => {
         case GET_FILTERED_BREEDS:
             return {
                 ...state,
-                breeds: action.payload
+                breeds: JSON.parse(JSON.stringify(action.payload))
             }
-        case SORT_BY:
+        case ORDER_BY:
             return {
                 ...state,
                 breeds: JSON.parse(JSON.stringify(action.payload))
+            }
+        case SEARCH_BY_NAME:
+            return {
+                ...state,
+                foundByName: JSON.parse(JSON.stringify(action.payload))
             }
         default:
             return state
