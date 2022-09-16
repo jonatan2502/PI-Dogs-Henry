@@ -53,7 +53,7 @@ router.get('/dogs', async (req, res) => {
             if (response.length) {
                 res.status(200).json(response)
             } else {
-                res.status(404).json({'msg': `Sorry, your search for <h2>${raza}</h2> did not return any results.`})
+                res.status(404).json({'msg': `Sorry, your search for "${raza}" did not return any results.`})
             }
         } else {
             const response_api = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)

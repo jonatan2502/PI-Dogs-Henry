@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllTemperaments } from '../../redux/actions'
 
 
 export default function Form() {
@@ -10,8 +11,17 @@ export default function Form() {
     const maxHeightRef = useRef()
     const minLifespanRef = useRef()
     const maxLifespanRef = useRef()
+    const temperamentsRef = useRef()
     const imageRef = useRef()
     
+    const temperaments = useSelector(store => store.temperaments)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getAllTemperaments())
+    }, [])
+
     const [breed, setBreed] = useState({
         name: '',
         minHeight: '',
@@ -20,6 +30,7 @@ export default function Form() {
         maxWeight: '',
         minLifespan: '',
         maxLifespan: '',
+        temperaments: [],
         image: '',
     })
     
@@ -51,7 +62,24 @@ export default function Form() {
         }
         validate(e)
     }
-    
+
+    const handleAddTemperament = (e) => {
+        // console.log(temperamentsRef)
+        const value = temperamentsRef.current.value
+        setBreed({
+                ...breed,
+                temperaments: !breed.temperaments.includes(value) ? [...breed.temperaments, value] : breed.temperaments
+            })
+        temperamentsRef.current.value = ''
+    }
+
+    const handleReset = () => {
+        setBreed({
+            ...breed,
+            temperaments: ''
+        })
+    }
+
     // Validates name and image URL input fields and calls aux function to validades numeric fields depending on the input name.
     // Uses useRef hook in order to get actual values from input fields
     const validate = (event) => {
@@ -100,18 +128,19 @@ export default function Form() {
     const handleSubmit = (e) => {
         e.preventDefault()
     }
-    
+    // console.log(temperaments)
     const isDisabled = !!Object.values(errorMessage).join('') //Checks if there is any error message to enable/disable submit button
     
     return (
         <div>
-            <h2>Create Breed</h2>
+            <h2>Create a new breed</h2>
             <small>All fields are required</small>
-            <form onSubmit={handleSubmit}>
+
+            <form onSubmit={handleSubmit} autoComplete='off'>
 
                 <label>Name: </label><br></br>
                 <input name='name' value={breed.name} onChange={handleChange}></input>
-                <small>{50 - breed.name.length} characters left</small><br></br>
+                <small> {50 - breed.name.length} characters left</small><br></br>
                 <small>{errorMessage.name}</small>
                 <br></br>
 
@@ -139,12 +168,25 @@ export default function Form() {
                 <small>{errorMessage.lifespan}</small>
                 <br></br>
 
-                <label>Imgame URL:</label>
+                <label>Temperament: </label><br></br>
+                <small>Choose a temperament from the dropdown list or enter your own and then click on 'Add'</small><br></br>
+                <input list='temperaments' name='temperaments'   ref={temperamentsRef}></input>
+                <button onClick={e => handleAddTemperament(e)}>Add</button>
+                <datalist id='temperaments'>
+                    {temperaments.map(e => <option value={e} key={e}></option>)}
+                </datalist>
+                <br></br>
+                <input name='temperament' readOnly='readonly' value={breed.temperaments}></input>
+                <button onClick={handleReset}>Reset</button>
+                <br></br>
+                
+
+                <label>Imgame URL: </label>
                 <input name="image" value={breed.image} onChange={handleChange} ref={imageRef}></input>
                 <small>{errorMessage.image}</small>
                 <br></br><br></br>
 
-                <input type='submit' disabled={isDisabled}></input>
+                <input type='submit' disabled={isDisabled} name='submit' value='Create'></input>
 
             </form>
         </div>

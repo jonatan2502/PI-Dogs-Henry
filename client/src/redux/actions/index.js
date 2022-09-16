@@ -9,6 +9,7 @@ export const GET_FILTERED_BREEDS = 'GET_FILTERED_BREEDS'
 export const ORDER_BY = 'ORDER_BY'
 export const ERROR = 'ERROR'
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME'
+export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 
 export function getAllBreeds() {
     return async function(dispatch) {
@@ -85,6 +86,15 @@ export function clearDetails() {
         return dispatch({
             type: CLEAR_DETAILS,
             payload: ''
+        })
+    }
+}
+
+export function clearSearch() {
+    return async function(dispatch) {
+        return dispatch({
+            type: CLEAR_SEARCH,
+            payload: []
         })
     }
 }

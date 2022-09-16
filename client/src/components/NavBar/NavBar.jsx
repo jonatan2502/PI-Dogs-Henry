@@ -9,9 +9,10 @@ export default function NavBar(props) {
     const inputRef = useRef()
 
     const onSearch = function (event) {
-        console.log(inputRef)
-        const name = event.target.value
+        //console.log(inputRef)
+        //const name = event.target.value
         dispatch(searchByName(inputRef.current.value))
+        inputRef.current.value = ''
     }
     return (
         <div>
