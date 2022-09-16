@@ -38,9 +38,10 @@ export function getBreed(id) {
                 payload: res.data
             })  
         } catch (error) {
+            // console.log(error.response.data.msg)
             return dispatch({
                 type: GET_BREED,
-                payload: error
+                payload: error.response.data
             })  
         }
     }
@@ -75,7 +76,7 @@ export function getAllTemperaments() {
         } catch (error) {
             return dispatch({
                 type: GET_ALL_TEMPERAMENTS,
-                payload: error
+                payload: error.response
             })     
         }
     }
@@ -121,7 +122,7 @@ export function getFilteredBreeds(temperament, breeds) {
         } catch (error) {
             return dispatch({
                 type: GET_FILTERED_BREEDS,
-                payload: error
+                payload: error.response
             })  
         }
     }
@@ -156,7 +157,7 @@ export function orderBy(order, breeds) {
                 console.log(error)
                 return dispatch({
                     type: ORDER_BY,
-                    payload: error
+                    payload: error.response
                 })
             }
     }
@@ -172,7 +173,7 @@ export function searchByName(name) {
                 payload: res.data
             })
         } catch (error) {
-            console.log(error.response)
+            // console.log(error.response)
                 return dispatch({
                     type: SEARCH_BY_NAME,
                     payload: error.response

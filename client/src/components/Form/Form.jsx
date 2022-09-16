@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllTemperaments } from '../../redux/actions'
+import { Link } from 'react-router-dom'
 
 
 export default function Form() {
@@ -124,6 +125,22 @@ export default function Form() {
                 })
             }
     }
+
+    const resetForm = () => {
+        setBreed(
+            {
+                name: '',
+                minHeight: '',
+                maxHeight: '',
+                minWeight: '',
+                maxWeight: '',
+                minLifespan: '',
+                maxLifespan: '',
+                temperaments: [],
+                image: '',
+            }
+        )
+    }
   
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -181,14 +198,16 @@ export default function Form() {
                 <br></br>
                 
 
-                <label>Imgame URL: </label>
+                <label>Image URL: </label>
                 <input name="image" value={breed.image} onChange={handleChange} ref={imageRef}></input>
                 <small>{errorMessage.image}</small>
                 <br></br><br></br>
 
                 <input type='submit' disabled={isDisabled} name='submit' value='Create'></input>
-
+                <input type='reset' value='Reset' onClick={resetForm}></input>
             </form>
+            <br></br>
+            <Link to='/home'><button>Back Home</button></Link>
         </div>
     )
 }

@@ -8,6 +8,8 @@ import DogDetail from './components/DogDetail/DogDetail';
 import Search from './components/Search/Search';
 import { searchByName } from './redux/actions';
 import { useDispatch } from 'react-redux';
+import RandomBreed from './components/RandomBreed/RandomBreed';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
 
@@ -19,7 +21,9 @@ function App() {
         <Route path='/' component={LandingPage} exact></Route>
         <Route path='/home' component={Home} exact></Route>
         <Route path='/createBreed' component={Form} exact></Route>
+        <Route path='/randomBreed' component={RandomBreed} exact></Route>
         <Route path='/breeds/:id' component={DogDetail}></Route>
+        <Route path='*' component={NotFound}></Route>
         {/* <Route path='*' component={NavBar}></Route> */}
       </Switch>
     </div>

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef } from "react"
 import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments, searchByName } from "../../redux/actions"
 import Options from "../Options/Options"
+import Loader from "../Loader/Loader"
 
 
 export default function Home() {
@@ -37,8 +38,8 @@ export default function Home() {
         
         // breeds = orderBreeds
     }
-
-    return (
+    if (!breeds.length) return <Loader></Loader>
+    else return (
         <div>
             {/* <Options handleOrderBy={handleOrderBy} handleFilter={handleFilter}></Options> */}
             <div>

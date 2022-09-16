@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { clearSearch } from "../../redux/actions"
 import DogCard from "../DogCard/DogCard"
+import { Link } from 'react-router-dom'
+import Loader from "../Loader/Loader"
 
 export default function Search(props) {
     const breeds = useSelector(store => store.foundByName)
@@ -21,11 +23,12 @@ export default function Search(props) {
         return (
             <div>
                 <p>{breeds.data.msg}</p>
+                <Link to='/home'><button>Back Home</button></Link>
             </div>
         )
     } else return (
         <div>
-            {console.log(breeds)}
+            {/* {console.log(breeds)} */}
             { 
                 breeds?.map((breed) =>
                     <DogCard
@@ -40,6 +43,7 @@ export default function Search(props) {
                     </DogCard> 
                 )
             }
+            <Link to='/home'><button>Back Home</button></Link>
         </div>
     )
 }
