@@ -31,13 +31,13 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     min_life_span: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT(3),
     },
     max_life_span: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT(3),
     },
     image: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(),
     }
   }, { timestamps: false });
 

@@ -2,8 +2,9 @@ import DogCard from "../DogCard/DogCard"
 import styles from "./Home.module.css"
 import axios from 'axios'
 import NavBar from "../NavBar/NavBar"
+import Pagination from '../Pagination/Pagination'
 import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments, searchByName } from "../../redux/actions"
 import Options from "../Options/Options"
 import Loader from "../Loader/Loader"
@@ -15,6 +16,13 @@ export default function Home() {
     const temperaments = useSelector((state) => state.temperaments).sort()
     const breeds = useSelector(store => store.breeds)
     const orderRef = useRef()
+
+    const [page, setPage] = useState(1)
+    const [perPage, setPerPage] = useState(8)
+
+    const maxPage = Math.ceil(breeds.length / perPage)
+
+    console.log(maxPage)
     // let breeds = useSelector(store => store.orderedBreeds)
     useEffect((() => {
         dispatch(getAllBreeds())
@@ -64,7 +72,10 @@ export default function Home() {
                 </select>
             </div>
             {
-                breeds.map((breed) =>
+                breeds.slice(
+                    (page - 1) * perPage,
+                    ((page - 1) * perPage) + perPage
+                ).map((breed) =>
                     <DogCard
                         key={breed.id}
                         id={breed.id}
@@ -77,6 +88,7 @@ export default function Home() {
                     </DogCard> 
                 )
             }
+            <Pagination page={page} setPage={setPage} maxPage={maxPage}></Pagination>
         </div>
     )
 }

@@ -30,9 +30,9 @@ export default function Search(props) {
         <div>
             {/* {console.log(breeds)} */}
             { 
-                breeds?.map((breed) =>
+                breeds?.map((breed, i) =>
                     <DogCard
-                        key={breed.id}
+                        key={i}
                         id={breed.id}
                         name={breed.name}
                         image={breed.image}

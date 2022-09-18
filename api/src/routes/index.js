@@ -160,15 +160,16 @@ router.get('/temperaments', async (req, res) => {
 })
 
 router.post("/dogs", async (req, res) => {
+    console.log(req.body)
     try {
-        const { name, minHeight, maxHeight, minWeight, maxWeight, minLifeSpan, maxLifeSpan, temperaments, image } = req.body
+        const { name, minHeight, maxHeight, minWeight, maxWeight, minLifespan, maxLifespan, temperaments, image } = req.body
         //console.log(req.body)
         const exists = await Raza.findOne({
             where: {
                 name: name,
             }
         })
-        if (exists) return res.status(400).json({'msg': `Sorry, the ${name} breed already exists.`})
+        if (exists) return res.status(400).json({'msg': `Sorry, the "${name}" breed already exists.`})
         try {
             const raza = await Raza.create({ //findOrCreate
                 name: name,
@@ -176,8 +177,8 @@ router.post("/dogs", async (req, res) => {
                 max_height: maxHeight, 
                 min_weight: minWeight, 
                 max_weight: maxWeight, 
-                min_life_span: minLifeSpan, 
-                max_life_span: maxLifeSpan,
+                min_life_span: minLifespan, 
+                max_life_span: maxLifespan,
                 image: image,
             })
 
@@ -192,9 +193,10 @@ router.post("/dogs", async (req, res) => {
                 //console.log(temperament)
                 await raza.addTemperamento(temperament[0], { through: RazaTemperamento })
             })
-            res.status(201).json(raza)
+            // res.status(201).json(raza)
+            res.status(201).json({'msg': `The new breed ${name} was successfully created.`})
         } catch (error) {
-            res.status(400).json({error})
+            res.status(400).json(error)
             //res.status(400).json({'msg': `Sorry, there was a problem creating your new breed`})
         }
     } catch (error) {

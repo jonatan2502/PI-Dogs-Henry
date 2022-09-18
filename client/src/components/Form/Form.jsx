@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllTemperaments } from '../../redux/actions'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 
 export default function Form() {
@@ -65,6 +66,7 @@ export default function Form() {
     }
 
     const handleAddTemperament = (e) => {
+        e.preventDefault()
         // console.log(temperamentsRef)
         const value = temperamentsRef.current.value
         setBreed({
@@ -74,7 +76,8 @@ export default function Form() {
         temperamentsRef.current.value = ''
     }
 
-    const handleReset = () => {
+    const handleReset = (e) => {
+        e.preventDefault()
         setBreed({
             ...breed,
             temperaments: ''
@@ -142,8 +145,16 @@ export default function Form() {
         )
     }
   
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        try {
+            const resp = await axios.post('http://localhost:3001/dogs/', breed)
+            resetForm()
+            alert(resp.data.msg)
+        } catch (error) {
+            alert(error.response.data.msg)
+            // alert('')
+        }
     }
     // console.log(temperaments)
     const isDisabled = !!Object.values(errorMessage).join('') //Checks if there is any error message to enable/disable submit button
@@ -153,7 +164,7 @@ export default function Form() {
             <h2>Create a new breed</h2>
             <small>All fields are required</small>
 
-            <form onSubmit={handleSubmit} autoComplete='off'>
+            <form autoComplete='off' >
 
                 <label>Name: </label><br></br>
                 <input name='name' value={breed.name} onChange={handleChange}></input>
@@ -194,7 +205,7 @@ export default function Form() {
                 </datalist>
                 <br></br>
                 <input name='temperament' readOnly='readonly' value={breed.temperaments}></input>
-                <button onClick={handleReset}>Reset</button>
+                <button onClick={e => handleReset(e)}>Reset</button>
                 <br></br>
                 
 
@@ -203,7 +214,7 @@ export default function Form() {
                 <small>{errorMessage.image}</small>
                 <br></br><br></br>
 
-                <input type='submit' disabled={isDisabled} name='submit' value='Create'></input>
+                <input type='submit' disabled={isDisabled} name='submit' value='Create' onClick={handleSubmit}></input>
                 <input type='reset' value='Reset' onClick={resetForm}></input>
             </form>
             <br></br>
