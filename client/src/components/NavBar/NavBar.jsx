@@ -39,7 +39,7 @@ export default function NavBar(props) {
             <Link to={`/breeds/${temperaments[id] && temperaments[id].id}`}>Random Breed</Link>
             <div>
                 <input ref={inputRef} placeholder='Search by name'></input>
-                <Link to='/search'><button onClick={e => onSearch(e)}> Go </button></Link>
+                <Link to='/search'><button onClick={e => onSearch(e)}> <BiSearchAlt/> </button></Link>
             </div>
             {/* <SearchBar></SearchBar> */}
         </div>

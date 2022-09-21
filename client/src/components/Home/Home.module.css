@@ -10,5 +10,10 @@
 
 .filters {
     padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+    justify-content: center;
 }
 
+.filters label {
+    padding: 0rem 1rem 0rem 1rem;
+}

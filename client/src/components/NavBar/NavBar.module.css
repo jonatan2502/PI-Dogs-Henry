@@ -1,7 +1,7 @@
 .navBar {
     display: flex;
     /* padding: 2rem 2rem 2rem 2rem; */
-    background-color: #6C584C;
+    background-color: #000000;
     justify-content: flex-end;
     align-items: center;
     height: 4.5rem;
@@ -13,15 +13,17 @@
 .navBar a {
     width: 9%;
     /* height: 8vh; */
-    height: 100%;
+    /* height: 100%; */
     /* max-height: 100%; */
     font-weight: bold;
     align-content: center;
 }
 
 .navBar a:hover {
-    background-color: #ADC178;
-    color: #6C584C
+    /* background-color: #ADC178; */
+    color: #6e7f41;
+    border: none;
+    border-bottom: #6e7f41;
 }
 
 a:visited {
@@ -45,4 +47,13 @@ a:link {
 
 .navBar button {
     margin-right: 3rem;
+}
+
+.navBar input:focus {
+    background-color: #6e7f41;
+    color: #F0EAD2
+}
+
+.navBar input:focus::placeholder {
+    color: #F0EAD2
 }

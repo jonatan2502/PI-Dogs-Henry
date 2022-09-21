@@ -5,6 +5,7 @@ import DogCard from "../DogCard/DogCard"
 import { Link } from 'react-router-dom'
 import Loader from "../Loader/Loader"
 import NavBar from "../NavBar/NavBar"
+import Styles from './Search.module.css'
 
 export default function Search(props) {
     const breeds = useSelector(store => store.foundByName)
@@ -29,23 +30,25 @@ export default function Search(props) {
         )
     } else return (
         <div>
-            {/* {console.log(breeds)} */}
-            <NavBar></NavBar>
-            { 
-                breeds?.map((breed, i) =>
-                    <DogCard
-                        key={i}
-                        id={breed.id}
-                        name={breed.name}
-                        image={breed.image}
-                        minWeight={breed.min_weight}
-                        maxWeight={breed.max_weight}
-                        temperament={breed.Temperamentos.map((e)=> e.name)}
-                    >
-                    </DogCard> 
-                )
-            }
-            <Link to='/home'><button>Back Home</button></Link>
+            <div className={Styles.cardsContainer}>
+                {/* {console.log(breeds)} */}
+                <NavBar></NavBar>
+                { 
+                    breeds?.map((breed, i) =>
+                        <DogCard
+                            key={i}
+                            id={breed.id}
+                            name={breed.name}
+                            image={breed.image}
+                            minWeight={breed.min_weight}
+                            maxWeight={breed.max_weight}
+                            temperament={breed.Temperamentos.map((e)=> e.name)}
+                        >
+                        </DogCard> 
+                    )
+                }
+            </div>
+                <Link to='/home'><button>Back Home</button></Link>
         </div>
     )
 }

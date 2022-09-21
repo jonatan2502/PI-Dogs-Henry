@@ -33,17 +33,19 @@ export default function DogDetail() {
                     <img className={Styles.CardImage} src={breedDetail.image ? breedDetail.image : defaultImage} alt='Dog'></img>
                 </div>
                 <div>
-                    <h1>{breedDetail.name}</h1>
-                    <p>Weight: {
+                    <h2>{breedDetail.name}</h2>
+                    <p><b>Weight: </b>{
                         breedDetail.min_weight === breedDetail.max_weight ? `${breedDetail.max_weight} lb` : `${breedDetail.min_weight} - ${breedDetail.max_weight} lb`}</p>
-                    <p>Height: {
+                    <p><b>Height: </b>{
                         breedDetail.min_height === breedDetail.max_height ? `${breedDetail.max_height} in` : `${breedDetail.min_height} - ${breedDetail.max_height} in`}</p>
-                    <p>Temperament: {breedDetail.Temperamentos?.map((e)=> e.name).join(', ')}</p>
-                    <p>Life span: {
+                    <p><b>Temperament: </b>{breedDetail.Temperamentos?.map((e)=> e.name).join(', ')}</p>
+                    <p><b>Life span: </b>{
                         breedDetail.min_life_span === breedDetail.max_life_span ? `${breedDetail.max_life_span} years` : `${breedDetail.min_life_span} - ${breedDetail.max_life_span} years`}</p>
                 </div>
             </div>
-            <Link to='/home'><button>Back Home</button></Link>
+            <div className={Styles.options}>
+                <Link to='/home'><button>Back Home</button></Link>
+            </div>
         </>
     )
 }
