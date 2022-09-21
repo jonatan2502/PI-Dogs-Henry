@@ -1,0 +1,71 @@
+@font-face {
+    font-family: MainFont;
+    src: url('./../../assets/fonts/dDegradasi.ttf');
+}
+
+@font-face {
+    font-family: BodyFont;
+    src: url('./../../assets/fonts/coolvetica\ rg.otf');
+}
+
+h1 {
+    font-family: MainFont;
+    font-size: 80px;
+    text-shadow: 0 0 30px black, 0 0 3px black;
+}
+
+.video {
+    position: fixed;
+    right: 0;
+    bottom: 10;
+    overflow: hidden;
+}
+
+.welcome {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100vw;
+    padding: 20px;
+}
+
+/* From uiverse.io by @WhiteNervosa */
+.button button {
+    font-size: 24px;
+    color: #e1e1e1;
+    text-shadow: 0 0 30px black, 0 0 3px black;
+    font-weight: 800;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+  }
+  
+  .button button:focus,
+  .button button:hover {
+    color: #fff;
+  }
+  
+  .button button:focus:after,
+  .button button:hover:after {
+    width: 100%;
+    left: 0%;
+  }
+  
+  .button button:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #fff;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
+  }

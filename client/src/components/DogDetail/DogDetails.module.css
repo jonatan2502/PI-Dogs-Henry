@@ -1,3 +1,13 @@
 .CardImage {
-    max-width: 250px;
+    width: 50vw;
+    max-height: 75vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.imgContainer{
+    width: 50vw;
 }

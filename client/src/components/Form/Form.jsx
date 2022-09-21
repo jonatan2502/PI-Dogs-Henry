@@ -3,6 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getAllTemperaments } from '../../redux/actions'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import NavBar from "../NavBar/NavBar";
+import Video from '../../assets/img/production ID_4838318.mp4'
+import Styles from './Form.module.css'
+import { GrFormAdd } from 'react-icons/gr'
+import { BsTrash } from 'react-icons/bs'
 
 
 export default function Form() {
@@ -161,64 +166,76 @@ export default function Form() {
     
     return (
         <div>
-            <h2>Create a new breed</h2>
-            <small>All fields are required</small>
+            <NavBar></NavBar>
+            <div className={Styles.main}>
+                <div className={Styles.formContainer}>
+                    <h2>Create a new breed</h2>
+                    {/* <small>All fields are required</small> */}
 
-            <form autoComplete='off' >
+                    <form autoComplete='off' >
 
-                <label>Name: </label><br></br>
-                <input name='name' value={breed.name} onChange={handleChange}></input>
-                <small> {50 - breed.name.length} characters left</small><br></br>
-                <small>{errorMessage.name}</small>
-                <br></br>
+                        <label><b>Name: </b></label><br></br>
+                        <input type='text' name='name' value={breed.name} onChange={handleChange}></input>
+                        <small> {50 - breed.name.length} characters left</small><br></br>
+                        <small className={Styles.errorMsg}>{errorMessage.name}</small>
+                        <br></br>
 
-                <label>Height</label><br></br>
-                <label>Min: </label>
-                <input name='minHeight' type='number' value={breed.minHeight} onChange={handleChange} ref={minHeightRef}></input>
-                <label>Max: </label>
-                <input name='maxHeight' type='number' value={breed.maxHeight} onChange={handleChange} ref={maxHeightRef}></input>
-                <small>{errorMessage.height}</small>
-                <br></br>
+                        <label><b>Height</b></label><br></br>
+                        <label>Min: </label>
+                        <input name='minHeight' type='number' value={breed.minHeight} onChange={handleChange} ref={minHeightRef}></input>
+                        <label>Max: </label>
+                        <input name='maxHeight' type='number' value={breed.maxHeight} onChange={handleChange} ref={maxHeightRef}></input>
+                        <small className={Styles.errorMsg}>{errorMessage.height}</small>
+                        <br></br><br></br>
 
-                <label>Weight</label><br></br>
-                <label>Min: </label>
-                <input name='minWeight' type='number' value={breed.minWeight} onChange={handleChange} ref={minWeightRef}></input>
-                <label>Max: </label>
-                <input name='maxWeight' type='number' value={breed.maxWeight} onChange={handleChange} ref={maxWeightRef}></input>
-                <small>{errorMessage.weight}</small>
-                <br></br>
+                        <label><b>Weight</b></label><br></br>
+                        <label>Min: </label>
+                        <input name='minWeight' type='number' value={breed.minWeight} onChange={handleChange} ref={minWeightRef}></input>
+                        <label>Max: </label>
+                        <input name='maxWeight' type='number' value={breed.maxWeight} onChange={handleChange} ref={maxWeightRef}></input>
+                        <small className={Styles.errorMsg}>{errorMessage.weight}</small>
+                        <br></br><br></br>
 
-                <label>Life Span</label><br></br>
-                <label>Min: </label>
-                <input name='minLifespan' type='number' value={breed.minLifespan} onChange={handleChange} ref={minLifespanRef}></input>
-                <label>Max: </label>
-                <input name='maxLifespan' type='number' value={breed.maxLifespan} onChange={handleChange} ref={maxLifespanRef}></input>
-                <small>{errorMessage.lifespan}</small>
-                <br></br>
+                        <label><b>Life Span</b></label><br></br>
+                        <label>Min: </label>
+                        <input name='minLifespan' type='number' value={breed.minLifespan} onChange={handleChange} ref={minLifespanRef}></input>
+                        <label>Max: </label>
+                        <input name='maxLifespan' type='number' value={breed.maxLifespan} onChange={handleChange} ref={maxLifespanRef}></input>
+                        <small className={Styles.errorMsg}>{errorMessage.lifespan}</small>
+                        <br></br><br></br>
 
-                <label>Temperament: </label><br></br>
-                <small>Choose a temperament from the dropdown list or enter your own and then click on 'Add'</small><br></br>
-                <input list='temperaments' name='temperaments'   ref={temperamentsRef}></input>
-                <button onClick={e => handleAddTemperament(e)}>Add</button>
-                <datalist id='temperaments'>
-                    {temperaments.map(e => <option value={e} key={e}></option>)}
-                </datalist>
-                <br></br>
-                <input name='temperament' readOnly='readonly' value={breed.temperaments}></input>
-                <button onClick={e => handleReset(e)}>Reset</button>
-                <br></br>
-                
+                        <label><b>Temperament: </b></label><br></br>
+                        <small>Choose a temperament from the dropdown list or enter your own and then click on 'Add'</small><br></br>
+                        <input list='temperaments' name='temperaments' ref={temperamentsRef}></input>
+                        <button onClick={e => handleAddTemperament(e)} title='Add'><GrFormAdd/></button>
+                        <datalist id='temperaments'>
+                            {temperaments.map(e => <option value={e} key={e}></option>)}
+                        </datalist>
+                        
+                        <input name='temperament' readOnly='readonly' value={breed.temperaments}></input>
+                        <button onClick={e => handleReset(e)} title='Clear' id='remove'><BsTrash/></button>
+                        <br></br><br></br>
+                        
 
-                <label>Image URL: </label>
-                <input name="image" value={breed.image} onChange={handleChange} ref={imageRef}></input>
-                <small>{errorMessage.image}</small>
-                <br></br><br></br>
+                        <label><b>Image URL: </b></label>
+                        <input type='text' name="image" value={breed.image} onChange={handleChange} ref={imageRef}></input>
+                        <small className={Styles.errorMsg}>   {errorMessage.image}</small>
+                        <br></br><br></br>
+                        <div className={Styles.submitReset}>
+                            <input type='submit' disabled={isDisabled} name='submit' value='Create' onClick={handleSubmit}></input>
+                            <input type='reset' value='Reset' onClick={resetForm} title='Reset'></input>
+                            <Link to='/home'><input type='button' value='Back home'></input></Link>              
+                        </div>
+                    </form>
+                    <br></br>
+                </div>
 
-                <input type='submit' disabled={isDisabled} name='submit' value='Create' onClick={handleSubmit}></input>
-                <input type='reset' value='Reset' onClick={resetForm}></input>
-            </form>
-            <br></br>
-            <Link to='/home'><button>Back Home</button></Link>
+                <div className={Styles.videoContainer}>
+                    <video autoPlay muted loop id='formVideo'>
+                        <source src={Video} type='video/mp4'></source>
+                    </video>
+                </div>
+            </div>
         </div>
     )
 }

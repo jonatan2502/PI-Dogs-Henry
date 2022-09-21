@@ -1,5 +1,5 @@
 import DogCard from "../DogCard/DogCard"
-import styles from "./Home.module.css"
+import Styles from "./Home.module.css"
 import axios from 'axios'
 import NavBar from "../NavBar/NavBar"
 import Pagination from '../Pagination/Pagination'
@@ -22,8 +22,6 @@ export default function Home() {
 
     const maxPage = Math.ceil(breeds.length / perPage)
 
-    console.log(maxPage)
-    // let breeds = useSelector(store => store.orderedBreeds)
     useEffect((() => {
         dispatch(getAllBreeds())
     }), [])
@@ -49,8 +47,8 @@ export default function Home() {
     if (!breeds.length) return <Loader></Loader>
     else return (
         <div>
-            {/* <Options handleOrderBy={handleOrderBy} handleFilter={handleFilter}></Options> */}
-            <div>
+            <NavBar></NavBar>
+            <div className={Styles.filters}>
                 <label>Choose temperament: </label>
                 <select name='filterBy' onChange={(e)=> handleFilter(e)}>
                     <option value=''>All</option>
@@ -71,23 +69,25 @@ export default function Home() {
                     </optgroup>
                 </select>
             </div>
-            {
-                breeds.slice(
-                    (page - 1) * perPage,
-                    ((page - 1) * perPage) + perPage
-                ).map((breed) =>
-                    <DogCard
-                        key={breed.id}
-                        id={breed.id}
-                        name={breed.name}
-                        image={breed.image}
-                        minWeight={breed.min_weight}
-                        maxWeight={breed.max_weight}
-                        temperament={breed.Temperamentos.map((e)=> e.name)}
-                    >
-                    </DogCard> 
-                )
-            }
+            <div className={Styles.cardsContainer}>
+                {
+                    breeds.slice(
+                        (page - 1) * perPage,
+                        ((page - 1) * perPage) + perPage
+                    ).map((breed) =>
+                        <DogCard
+                            key={breed.id}
+                            id={breed.id}
+                            name={breed.name}
+                            image={breed.image}
+                            minWeight={breed.min_weight}
+                            maxWeight={breed.max_weight}
+                            temperament={breed.Temperamentos.map((e)=> e.name)}
+                            >
+                        </DogCard> 
+                    )
+                }
+            </div>
             <Pagination page={page} setPage={setPage} maxPage={maxPage}></Pagination>
         </div>
     )

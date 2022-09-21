@@ -4,6 +4,7 @@ import { clearSearch } from "../../redux/actions"
 import DogCard from "../DogCard/DogCard"
 import { Link } from 'react-router-dom'
 import Loader from "../Loader/Loader"
+import NavBar from "../NavBar/NavBar"
 
 export default function Search(props) {
     const breeds = useSelector(store => store.foundByName)
@@ -29,6 +30,7 @@ export default function Search(props) {
     } else return (
         <div>
             {/* {console.log(breeds)} */}
+            <NavBar></NavBar>
             { 
                 breeds?.map((breed, i) =>
                     <DogCard

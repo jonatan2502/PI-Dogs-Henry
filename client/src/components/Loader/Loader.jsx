@@ -2,10 +2,12 @@ import Styles from './Loader.module.css'
 
 export default function Loader() {
     return (
-        <div className={Styles.leap_frog}>
-            <div class={Styles.leap_frog__dot}></div>
-            <div class={Styles.leap_frog__dot}></div>
-            <div class={Styles.leap_frog__dot}></div>
+        <div className={Styles.container}>
+            <div className={Styles.leap_frog}>
+                <div className={Styles.leap_frog__dot}></div>
+                <div className={Styles.leap_frog__dot}></div>
+                <div className={Styles.leap_frog__dot}></div>
+            </div>
         </div>
     )
 }

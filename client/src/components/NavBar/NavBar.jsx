@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
 import { getAllBreeds, searchByName } from "../../redux/actions";
 import { useEffect, useRef, useState } from "react";
+import Styles from './NavBar.module.css'
+import { BiSearchAlt } from 'react-icons/bi'
+
+
 
 export default function NavBar(props) {
     const dispatch = useDispatch()
@@ -19,24 +22,24 @@ export default function NavBar(props) {
     // let i = Math.floor(Math.random() * temperaments.length)
     
     const handleClick = () => {
+    }
+    
+    useEffect(() => {
+        dispatch(getAllBreeds())
         setId(
             id = Math.floor(Math.random() * temperaments.length)
         )
-    }
-
-    useEffect(() => {
-        dispatch(getAllBreeds())
     }, [])
     
 
     return (
-        <div>
+        <div className={Styles.navBar}>
             <Link to='/home'>Home</Link>
             <Link to="/createBreed">Create New Breed</Link>
-            <Link to={`/breeds/${temperaments[id] && temperaments[id].id}`} onClick={handleClick}>Random Breed</Link>
+            <Link to={`/breeds/${temperaments[id] && temperaments[id].id}`}>Random Breed</Link>
             <div>
-                <input ref={inputRef}></input>
-                <Link to='/search'><button onClick={e => onSearch(e)}>Search</button></Link>
+                <input ref={inputRef} placeholder='Search by name'></input>
+                <Link to='/search'><button onClick={e => onSearch(e)}> Go </button></Link>
             </div>
             {/* <SearchBar></SearchBar> */}
         </div>

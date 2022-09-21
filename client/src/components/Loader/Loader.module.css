@@ -1,3 +1,11 @@
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    
+}
+
+
 /* From uiverse.io by @G4b413l */
 .leap_frog {
     --uib-size: 40px;

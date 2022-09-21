@@ -1,4 +1,6 @@
 import { useState } from "react"
+import Styles from './Pagination.module.css'
+import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
 
 
 export default function Pagination({ page, setPage, maxPage }) {
@@ -31,11 +33,11 @@ export default function Pagination({ page, setPage, maxPage }) {
     }
 
     return (
-        <div>
-            <button disabled={page <= 1} onClick={prevPage}>&lt;&lt;</button>
+        <div className={Styles.pagination}>
+            <button disabled={page <= 1} onClick={prevPage}><GrLinkPrevious/></button>
             <input onChange={(e) => onChange(e)} onKeyDown={e => onKeyDown(e)} value={input}></input>
-            <p>of {maxPage}</p>
-            <button disabled={page >= maxPage} onClick={nextPage}>&gt;&gt;</button>
+            <p>of&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{maxPage} </p>
+            <button disabled={page >= maxPage} onClick={nextPage}><GrLinkNext/></button>
         </div>
     )
 }
