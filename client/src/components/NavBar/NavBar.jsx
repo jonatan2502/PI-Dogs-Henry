@@ -10,9 +10,11 @@ import { BiSearchAlt } from 'react-icons/bi'
 export default function NavBar(props) {
     const dispatch = useDispatch()
     const inputRef = useRef()
-    const temperaments = useSelector((state) => state.breeds)
-    let [id, setId] = useState(22)
+    const breeds = useSelector((state) => state.breeds)
+    let [aux, setAux] = useState(breeds)
 
+    let id = aux[Math.floor(Math.random() * aux.length)].id
+    console.log(breeds, id)
     const onSearch = function (event) {
         //console.log(inputRef)
         //const name = event.target.value
@@ -26,9 +28,9 @@ export default function NavBar(props) {
     
     useEffect(() => {
         dispatch(getAllBreeds())
-        setId(
-            id = Math.floor(Math.random() * temperaments.length)
-        )
+        // setId(
+        //     id = breeds[Math.floor(Math.random() * breeds.length).id]
+        // )
     }, [])
     
 
@@ -36,7 +38,8 @@ export default function NavBar(props) {
         <div className={Styles.navBar}>
             <Link to='/home'>Home</Link>
             <Link to="/createBreed">Create New Breed</Link>
-            <Link to={`/breeds/${temperaments[id] && temperaments[id].id}`}>Random Breed</Link>
+            {/* <Link to={`/breeds/${temperaments[id] && temperaments[id].id }`}>Random Breed</Link> */}
+            <Link to={`/breeds/${id}`}>Random Breed</Link>
             <div>
                 <input ref={inputRef} placeholder='Search by name'></input>
                 <Link to='/search'><button onClick={e => onSearch(e)}> <BiSearchAlt/> </button></Link>

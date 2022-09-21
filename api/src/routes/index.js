@@ -120,7 +120,7 @@ router.get('/dogs/:idRaza', async (req, res) => {
                 min_height: aux.height.imperial.split(' - ').length === 2 ? aux.height.imperial.split(' - ')[0] : aux.height.imperial,
                 max_height: aux.height.imperial.split(' - ').length === 2 ? aux.height.imperial.split(' - ')[1] : aux.height.imperial,
                 min_life_span: aux.life_span.split(' - ').length === 2 ? aux.life_span.split(' - ')[0] : aux.life_span.replace(' years', ''),
-                max_life_span: aux.life_span.split(' - ').length === 2 ? aux.life_span.split(' - ')[0] : aux.life_span.replace(' years', ''),
+                max_life_span: aux.life_span.split(' - ').length === 2 ? aux.life_span.split(' - ')[1] : aux.life_span.replace(' years', ''),
                 image: aux.image.url,
 
             }

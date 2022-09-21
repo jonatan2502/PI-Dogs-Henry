@@ -38,9 +38,9 @@ export default function DogDetail() {
                         breedDetail.min_weight === breedDetail.max_weight ? `${breedDetail.max_weight} lb` : `${breedDetail.min_weight} - ${breedDetail.max_weight} lb`}</p>
                     <p><b>Height: </b>{
                         breedDetail.min_height === breedDetail.max_height ? `${breedDetail.max_height} in` : `${breedDetail.min_height} - ${breedDetail.max_height} in`}</p>
-                    <p><b>Temperament: </b>{breedDetail.Temperamentos?.map((e)=> e.name).join(', ')}</p>
+                    <p><b>Temperament: </b>{breedDetail.Temperamentos.length ? breedDetail.Temperamentos.map((e)=> e.name).join(', ') : 'No records'}</p>
                     <p><b>Life span: </b>{
-                        breedDetail.min_life_span === breedDetail.max_life_span ? `${breedDetail.max_life_span} years` : `${breedDetail.min_life_span} - ${breedDetail.max_life_span} years`}</p>
+                        breedDetail.min_life_span === breedDetail.max_life_span ? `${breedDetail.max_life_span} years` : `${breedDetail.min_life_span} - ${breedDetail.max_life_span}`}</p>
                 </div>
             </div>
             <div className={Styles.options}>
