@@ -10,7 +10,7 @@
 .leap_frog {
     --uib-size: 40px;
     --uib-speed: 2s;
-    --uib-color: rgb(37, 37, 149);
+    --uib-color: #9ab64b;
     position: relative;
     display: flex;
     align-items: center;

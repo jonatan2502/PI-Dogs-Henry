@@ -1,4 +1,6 @@
-import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllBreeds } from "../../redux/actions"
 import DogCard from "../DogCard/DogCard"
 import DogDetail from "../DogDetail/DogDetail"
 import NavBar from "../NavBar/NavBar"
@@ -7,13 +9,17 @@ import NavBar from "../NavBar/NavBar"
 export default function RandomBreed() {
 
     const dispatch = useDispatch()
+    const breeds = useSelector((state) => state.breeds)
 
+    useEffect(() => {
+        dispatch(getAllBreeds())
+    }, [])
 
     return (
         <div>
             <NavBar></NavBar>
             {/* <DogDetail></DogDetail> */}
-            <DogCard></DogCard>
+            <DogDetail breeds={breeds}></DogDetail>
         </div>
     )
 }

@@ -8,7 +8,7 @@
     src: url('./../../assets/fonts/coolvetica\ rg.otf');
 }
 
-h1 {
+.welcome h1 {
     font-family: MainFont;
     font-size: 80px;
     text-shadow: 0 0 30px black, 0 0 3px black;
@@ -23,11 +23,14 @@ h1 {
 
 .welcome {
     position: fixed;
+    display: flex;
+    flex-direction: column;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     color: #f1f1f1;
     width: 100vw;
     padding: 20px;
+    align-items: center;
 }
 
 /* From uiverse.io by @WhiteNervosa */
@@ -47,7 +50,7 @@ h1 {
   
   .button button:focus,
   .button button:hover {
-    color: #fff;
+    color: #9ab64b;
   }
   
   .button button:focus:after,
@@ -64,7 +67,7 @@ h1 {
     position: absolute;
     width: 0%;
     height: 2px;
-    background-color: #fff;
+    background-color: #9ab64b;
     transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
     transition-duration: 400ms;
     transition-property: width, left;

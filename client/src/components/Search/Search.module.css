@@ -7,3 +7,9 @@
 .cardsContainer a {
     margin: 1rem 1rem 1rem 1rem;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

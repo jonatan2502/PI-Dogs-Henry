@@ -29,10 +29,10 @@ export default function Search(props) {
             </div>
         )
     } else return (
-        <div>
+        <div className={Styles.container}>
+            <NavBar></NavBar>
             <div className={Styles.cardsContainer}>
                 {/* {console.log(breeds)} */}
-                <NavBar></NavBar>
                 { 
                     breeds?.map((breed, i) =>
                         <DogCard

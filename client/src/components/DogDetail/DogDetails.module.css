@@ -1,3 +1,10 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .CardImage {
     width: 50vw;
     max-height: 75vh;
@@ -8,7 +15,8 @@
     justify-content: space-evenly;
     margin-top: 2rem;
     height: 500px;
-    /* width: 800px; */
+    width: 90%;
+    /* border: 2px solid black */
 }
 
 .imgContainer{
@@ -20,6 +28,7 @@
 .container h2 {
     font-size: 60px;
     text-decoration: none;
+    padding-left: 2rem;
 }
 
 .imgContainer img {

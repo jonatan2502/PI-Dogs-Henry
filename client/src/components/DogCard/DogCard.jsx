@@ -8,10 +8,12 @@ export default function DogCard(props) {
         <Link className={Styles.link} to={`/breeds/${props.id}`}>
             <div className={Styles.cardContainer}>
                     <img className={Styles.cardImage} src={props.image ? props.image : defaultImage} alt='Dog'></img>
-                    <p><b>Name: </b>{props.name}</p>
-                    <p><b>Weight: </b>{
-                        props.minWeight === props.maxWeight ? `${props.maxWeight} lb` : `${props.minWeight} - ${props.maxWeight} lb`}</p>
-                    <p><b>Temperament: </b>{props.temperament.join(', ')}</p>
+                    <section className={Styles.description}>
+                        <p><b>Name: </b>{props.name}</p>
+                        <p><b>Weight: </b>{
+                            props.minWeight === props.maxWeight ? `${props.maxWeight} lb` : `${props.minWeight} - ${props.maxWeight} lb`}</p>
+                        <p><b>Temperament: </b>{props.temperament.join(', ')}</p>
+                    </section>
             </div>
         </Link>
     )

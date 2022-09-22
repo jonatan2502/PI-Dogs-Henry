@@ -23,7 +23,13 @@ export default function DogDetail() {
     }, [id])
     console.log(breedDetail)
     if (!breedDetail.name && !breedDetail.msg) {
-        return <Loader></Loader>
+        return (
+            <div>
+                <NavBar></NavBar>
+                <Loader></Loader>
+            </div>
+        )
+
     } else if (breedDetail.msg) {
         return (
             <div>
@@ -39,7 +45,8 @@ export default function DogDetail() {
         )
     } else return (
         <>
-            <NavBar></NavBar>
+        <NavBar></NavBar>
+        <div className={Styles.main}>
             <div className={Styles.container}>
                 <div className={Styles.imgContainer}>
                     <img className={Styles.CardImage} src={breedDetail.image ? breedDetail.image : defaultImage} alt='Dog'></img>
@@ -58,6 +65,7 @@ export default function DogDetail() {
             <div className={Styles.options}>
                 <Link to='/home'><button>Back Home</button></Link>
             </div>
+        </div>
         </>
     )
 }

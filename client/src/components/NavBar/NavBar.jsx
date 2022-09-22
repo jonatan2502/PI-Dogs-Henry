@@ -14,8 +14,8 @@ export default function NavBar(props) {
     const breeds = useSelector((state) => state.breeds)
     let [aux, setAux] = useState(breeds)
     let { id } = useParams()
-    // let id
-    console.log(id)
+    // let id = breeds[Math.floor(Math.random() * breeds.length)].id
+    // console.log(breeds, id)
     const onSearch = function (event) {
         //console.log(inputRef)
         //const name = event.target.value
@@ -29,7 +29,7 @@ export default function NavBar(props) {
     
     useEffect(() => {
         dispatch(getAllBreeds())
-        id = aux.length ? aux[Math.floor(Math.random() * aux.length)].id : id
+        // id = aux.length ? aux[Math.floor(Math.random() * aux.length)].id : id
         // setId(
         //     id = breeds[Math.floor(Math.random() * breeds.length).id]
         // )
@@ -42,7 +42,7 @@ export default function NavBar(props) {
             <Link to="/createBreed">Create New Breed</Link>
             {/* <Link to={`/breeds/${temperaments[id] && temperaments[id].id }`}>Random Breed</Link> */}
             <Link to={`/breeds/${id}`}>Random Breed</Link>
-            <div>
+            <div className={Styles.searchBar}>
                 <input ref={inputRef} placeholder='Search by name'></input>
                 <Link to='/search'><button onClick={e => onSearch(e)}> <BiSearchAlt/> </button></Link>
             </div>
