@@ -6,6 +6,7 @@ import { clearDetails, getBreed } from '../../redux/actions'
 import defaultImage from '../../assets/img/default_img.jpg'
 import Loader from '../Loader/Loader'
 import NavBar from '../NavBar/NavBar'
+import Image from './../../assets/img/pexels-sam-lion-5732457.jpg'
 
 
 
@@ -24,7 +25,18 @@ export default function DogDetail() {
     if (!breedDetail.name && !breedDetail.msg) {
         return <Loader></Loader>
     } else if (breedDetail.msg) {
-        return <p>{breedDetail.msg}</p>
+        return (
+            <div>
+                <NavBar></NavBar>
+                <div className={Styles.notFound}>
+                    <p>{breedDetail.msg}</p>
+                    <img src={Image}></img>
+                    <div className={Styles.options}>
+                        <Link to='/home'><button>Back Home</button></Link>
+                    </div>
+                </div>
+            </div>
+        )
     } else return (
         <>
             <NavBar></NavBar>

@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getAllBreeds, searchByName } from "../../redux/actions";
 import { useEffect, useRef, useState } from "react";
 import Styles from './NavBar.module.css'
 import { BiSearchAlt } from 'react-icons/bi'
+
 
 
 
@@ -12,9 +13,9 @@ export default function NavBar(props) {
     const inputRef = useRef()
     const breeds = useSelector((state) => state.breeds)
     let [aux, setAux] = useState(breeds)
-
-    let id = aux[Math.floor(Math.random() * aux.length)].id
-    console.log(breeds, id)
+    let { id } = useParams()
+    // let id
+    console.log(id)
     const onSearch = function (event) {
         //console.log(inputRef)
         //const name = event.target.value
@@ -28,6 +29,7 @@ export default function NavBar(props) {
     
     useEffect(() => {
         dispatch(getAllBreeds())
+        id = aux.length ? aux[Math.floor(Math.random() * aux.length)].id : id
         // setId(
         //     id = breeds[Math.floor(Math.random() * breeds.length).id]
         // )

@@ -38,7 +38,7 @@ export function getBreed(id) {
                 payload: res.data
             })  
         } catch (error) {
-            // console.log(error.response.data.msg)
+            // console.log(error)
             return dispatch({
                 type: GET_BREED,
                 payload: error.response.data
