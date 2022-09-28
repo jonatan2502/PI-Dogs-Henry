@@ -10,6 +10,9 @@ export default function RandomBreed() {
 
     const dispatch = useDispatch()
     const breeds = useSelector((state) => state.breeds)
+    const randomIndex = Math.ceil(Math.random() * breeds.length)
+    console.log(randomIndex)
+    console.log(breeds)
 
     useEffect(() => {
         dispatch(getAllBreeds())

@@ -10,6 +10,7 @@ export const ORDER_BY = 'ORDER_BY'
 export const ERROR = 'ERROR'
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME'
 export const CLEAR_SEARCH = 'CLEAR_SEARCH'
+export const CLEAR_BREEDS = 'CLEAR_BREEDS'
 
 export function getAllBreeds() {
     return async function(dispatch) {
@@ -83,16 +84,21 @@ export function getAllTemperaments() {
 }
 
 export function clearDetails() {
-    return async function(dispatch) {
-        return dispatch({
+    return {
             type: CLEAR_DETAILS,
             payload: ''
-        })
-    }
+        }
+}
+
+export function clearBreeds() {
+    return {
+            type: CLEAR_SEARCH,
+            payload: ''
+        }
 }
 
 export function clearSearch() {
-    return async function(dispatch) {
+    return function(dispatch) {
         return dispatch({
             type: CLEAR_SEARCH,
             payload: []
@@ -100,8 +106,8 @@ export function clearSearch() {
     }
 }
 
-export function getFilteredBreeds(temperament, breeds) {
-    console.log(breeds)
+export function getFilteredBreeds(temperament) {
+    console.log(temperament)
     return async function(dispatch) {
         try {
             const res = await axios.get('http://localhost:3001/dogs')

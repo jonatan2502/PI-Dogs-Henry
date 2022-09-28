@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Loader from "../Loader/Loader"
 import NavBar from "../NavBar/NavBar"
 import Styles from './Search.module.css'
+import Image from './../../assets/img/pexels-sam-lion-5732457.jpg'
 
 export default function Search(props) {
     const breeds = useSelector(store => store.foundByName)
@@ -23,14 +24,17 @@ export default function Search(props) {
 
     if (breeds.data) {
         return (
-            <div>
+            <div className={Styles.notFound}>
+                <NavBar></NavBar>
                 <p>{breeds.data.msg}</p>
+                <img src={Image}></img>
                 <Link to='/home'><button>Back Home</button></Link>
             </div>
         )
     } else return (
         <div className={Styles.container}>
             <NavBar></NavBar>
+            <h2>Search results</h2>
             <div className={Styles.cardsContainer}>
                 {/* {console.log(breeds)} */}
                 { 

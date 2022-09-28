@@ -5,7 +5,7 @@ import NavBar from "../NavBar/NavBar"
 import Pagination from '../Pagination/Pagination'
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef, useState } from "react"
-import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments, searchByName } from "../../redux/actions"
+import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments, searchByName, clearBreeds } from "../../redux/actions"
 import Options from "../Options/Options"
 import Loader from "../Loader/Loader"
 
@@ -24,6 +24,9 @@ export default function Home() {
 
     useEffect((() => {
         dispatch(getAllBreeds())
+        // return () => {
+        //     dispatch(clearBreeds())
+        // }
     }), [])
     
     useEffect(() => {
@@ -44,7 +47,12 @@ export default function Home() {
         
         // breeds = orderBreeds
     }
-    if (!breeds.length) return <Loader></Loader>
+    if (!breeds.length) return (
+    <div>
+        <NavBar></NavBar>
+        <Loader></Loader>
+    </div>
+    )
     else return (
         <div>
             <NavBar></NavBar>

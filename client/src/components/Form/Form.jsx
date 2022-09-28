@@ -148,6 +148,7 @@ export default function Form() {
                 image: '',
             }
         )
+        temperamentsRef.current.value = ''
     }
   
     const handleSubmit = async (e) => {

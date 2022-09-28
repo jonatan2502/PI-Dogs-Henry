@@ -13,6 +13,8 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+
+
 router.get('/dogs', async (req, res) => {
     try {
         const raza = req.query.name

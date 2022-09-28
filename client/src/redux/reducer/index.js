@@ -1,4 +1,5 @@
 import { 
+    CLEAR_BREEDS,
     CLEAR_DETAILS,
     CLEAR_SEARCH,
     GET_ALL_BREEDS, 
@@ -38,6 +39,11 @@ const rootReducer = ( state = initialState, action) => {
             return {
                 ...state,
                 breedDetail: action.payload
+            }
+        case CLEAR_BREEDS:
+            return {
+                ...state,
+                breeds: []
             }
         case CLEAR_SEARCH:
             return {
