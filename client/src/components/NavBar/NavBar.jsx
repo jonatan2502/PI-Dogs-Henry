@@ -12,11 +12,13 @@ export default function NavBar(props) {
     const dispatch = useDispatch()
     const inputRef = useRef()
     const breeds = useSelector((state) => state.breeds)
+    const [input, setInput] = useState('')
     // let [aux, setAux] = useState(breeds)
     // let { id } = useParams()
     // let id = breeds[Math.floor(Math.random() * breeds.length)].id
-    let id = Math.ceil(Math.random() * (breeds.length - 1))
-    console.log(breeds, id)
+    let id = breeds.length ? breeds[Math.ceil(Math.random() * (breeds.length - 1))].id : 1
+    console.log(breeds)
+
     const onSearch = function (event) {
         //console.log(inputRef)
         //const name = event.target.value
@@ -25,7 +27,8 @@ export default function NavBar(props) {
     }
     // let i = Math.floor(Math.random() * temperaments.length)
     
-    const handleClick = () => {
+    const handleOnChange = (e) => {
+        setInput(e.target.value)
     }
     
     useEffect(() => {
@@ -35,7 +38,7 @@ export default function NavBar(props) {
         //     id = breeds[Math.floor(Math.random() * breeds.length).id]
         // )
     }, [])
-    
+    // console.log(input)
 
     return (
         <div className={Styles.navBar}>
@@ -45,8 +48,8 @@ export default function NavBar(props) {
             <Link to={`/breeds/${id}`}>Random Breed</Link>
             {/* <Link to='/breeds/randomBreed'>Random Breed</Link> */}
             <div className={Styles.searchBar}>
-                <input ref={inputRef} placeholder='Search by name'></input>
-                <Link to='/search'><button onClick={e => onSearch(e)}> <BiSearchAlt/> </button></Link>
+                <input ref={inputRef} placeholder='Search by name' value={input} onChange={e => handleOnChange(e)}></input>
+                <button onClick={e => onSearch(e)}><Link to='/search'  style={{pointerEvents: input === '' ? 'none' : ''}}><BiSearchAlt/></Link></button>
             </div>
             {/* <SearchBar></SearchBar> */}
         </div>

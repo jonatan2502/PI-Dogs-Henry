@@ -61,3 +61,11 @@ a:link {
 .navBar input:focus::placeholder {
     color: #F0EAD2
 }
+
+.searchBar a {
+    color: #6e7f41;
+}
+
+.searchBar a:hover {
+    color: black;
+}

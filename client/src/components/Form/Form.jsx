@@ -99,7 +99,8 @@ export default function Form() {
                 name: !/^[a-zA-Z\s]*$/.test(event.target.value) ? 'Only letters and spaces are allowed' : ''
             })
         } else if (event.target.name === 'image') {
-            const regEx = /^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$/
+            // const regEx = /^(ht|f)tp(s?)\:\/\/[0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*(:(0-9)*)*(\/?)([a-zA-Z0-9\-\.\?\,\'\/\\\+&amp;%\$#_]*)?$/
+            const regEx = /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/
             setErrorMessage({
                 ...errorMessage,
                 image: !regEx.test(event.target.value) ? 'Enter a valid URL' : ''
