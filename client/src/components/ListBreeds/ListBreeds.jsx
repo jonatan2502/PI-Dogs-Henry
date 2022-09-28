@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
-import { clearBreeds, getFilteredBreeds } from "../../redux/actions"
+import { getFilteredBreeds } from "../../redux/actions"
 import DogCard from "../DogCard/DogCard"
 import Loader from "../Loader/Loader"
 import NavBar from "../NavBar/NavBar"
@@ -12,18 +12,22 @@ import Styles from './ListBreeds.module.css'
 export default function ListBreeds() {
     const dispatch = useDispatch()
     const { temperament } = useParams()
-    const breeds = useSelector(store => store.breeds)
+    const allBreeds = useSelector(store => store.breeds)
     // console.log(temperament)
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(8)
 
-    const maxPage = Math.ceil(breeds.length / perPage)
+    const maxPage = Math.ceil(allBreeds.length / perPage)
 
     useEffect(() => {
         dispatch(getFilteredBreeds(temperament))
 
     }, [])
 
+    const breeds = []
+    allBreeds.forEach( breed => breed.Temperamentos.forEach(t => {
+        if (t.name === temperament) breeds.push(breed)
+    }))
 
     if (!breeds.length) return <Loader></Loader>
     else return (

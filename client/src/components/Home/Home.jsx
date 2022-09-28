@@ -1,12 +1,10 @@
 import DogCard from "../DogCard/DogCard"
 import Styles from "./Home.module.css"
-import axios from 'axios'
 import NavBar from "../NavBar/NavBar"
 import Pagination from '../Pagination/Pagination'
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef, useState } from "react"
 import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments, searchByName, clearBreeds } from "../../redux/actions"
-import Options from "../Options/Options"
 import Loader from "../Loader/Loader"
 
 
@@ -24,9 +22,6 @@ export default function Home() {
 
     useEffect((() => {
         dispatch(getAllBreeds())
-        // return () => {
-        //     dispatch(clearBreeds())
-        // }
     }), [])
     
     useEffect(() => {
@@ -44,8 +39,6 @@ export default function Home() {
         dispatch(getFilteredBreeds(temp, breeds))
         // dispatch(orderBy(orderRef.current.value, breeds)) //Dispatch getAllBreeds when component renders
         orderRef.current.value = 'name_asc'
-        
-        // breeds = orderBreeds
     }
     if (!breeds.length) return (
     <div>

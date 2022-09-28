@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllBreeds } from "../../redux/actions"
-import DogCard from "../DogCard/DogCard"
 import DogDetail from "../DogDetail/DogDetail"
 import NavBar from "../NavBar/NavBar"
 
@@ -21,7 +20,6 @@ export default function RandomBreed() {
     return (
         <div>
             <NavBar></NavBar>
-            {/* <DogDetail></DogDetail> */}
             <DogDetail breeds={breeds}></DogDetail>
         </div>
     )

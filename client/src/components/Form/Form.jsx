@@ -163,7 +163,7 @@ export default function Form() {
             // alert('')
         }
     }
-    // console.log(temperaments)
+
     const isDisabled = !!Object.values(errorMessage).join('') //Checks if there is any error message to enable/disable submit button
     
     return (

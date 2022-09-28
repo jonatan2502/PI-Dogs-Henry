@@ -3,7 +3,7 @@ import Styles from "./DogCard.module.css"
 import defaultImage from '../../assets/img/default_img.jpg'
 
 export default function DogCard(props) {
-    //console.log(props)
+
     return (
         <Link className={Styles.link} to={`/breeds/${props.id}`}>
             <div className={Styles.cardContainer}>

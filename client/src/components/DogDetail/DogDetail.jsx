@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom'
 import Styles from './DogDetails.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { clearBreeds, clearDetails, getBreed } from '../../redux/actions'
+import { clearDetails, getBreed } from '../../redux/actions'
 import defaultImage from '../../assets/img/default_img.jpg'
 import Loader from '../Loader/Loader'
 import NavBar from '../NavBar/NavBar'
@@ -19,10 +19,9 @@ export default function DogDetail() {
         dispatch(getBreed(id))
         return () => {
             dispatch(clearDetails())
-            // dispatch(clearBreeds())
         }
     }, [id])
-    console.log(breedDetail, id)
+
     if (!breedDetail.name && !breedDetail.msg) {
         return (
             <div>
@@ -60,7 +59,7 @@ export default function DogDetail() {
                         breedDetail.min_weight === breedDetail.max_weight ? `${breedDetail.max_weight} lb` : `${breedDetail.min_weight} - ${breedDetail.max_weight} lb`}</p>
                     <p><b>Height: </b>{
                         breedDetail.min_height === breedDetail.max_height ? `${breedDetail.max_height} in` : `${breedDetail.min_height} - ${breedDetail.max_height} in`}</p>
-                    <p><b>Temperament: </b>{breedDetail.Temperamentos.length ? breedDetail.Temperamentos.map((e)=> <Link to={`/listBreeds/${e.name}`}>{`${e.name} `}</Link>) : 'No records'}</p>
+                    <p><b>Temperament: </b>{breedDetail.Temperamentos.length ? breedDetail.Temperamentos.map((e, i)=> <Link to={`/listBreeds/${e.name}`} key={i}>{`${e.name} `}</Link>) : 'No records'}</p>
                     <p><b>Life span: </b>{
                         breedDetail.min_life_span === breedDetail.max_life_span ? `${breedDetail.max_life_span} years` : `${breedDetail.min_life_span} - ${breedDetail.max_life_span}`}</p>
                 </div>

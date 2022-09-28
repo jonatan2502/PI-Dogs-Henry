@@ -11,11 +11,8 @@ import Image from './../../assets/img/pexels-sam-lion-5732457.jpg'
 export default function Search(props) {
     const breeds = useSelector(store => store.foundByName)
     const dispatch = useDispatch()
-    // const [found, setFound] = useState()
+
     useEffect(() => {
-        // dispatch(getBreed(id))
-        // dispatch(clearSearch())
-        // setFound(breeds)
         return (
             dispatch(clearSearch())
         )
@@ -36,7 +33,6 @@ export default function Search(props) {
             <NavBar></NavBar>
             <h2>Search results</h2>
             <div className={Styles.cardsContainer}>
-                {/* {console.log(breeds)} */}
                 { 
                     breeds?.map((breed, i) =>
                         <DogCard
