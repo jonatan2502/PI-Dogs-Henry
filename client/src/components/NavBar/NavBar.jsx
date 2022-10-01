@@ -4,7 +4,7 @@ import { getAllBreeds, searchByName } from "../../redux/actions";
 import { useEffect, useRef, useState } from "react";
 import Styles from './NavBar.module.css'
 import { BiSearchAlt } from 'react-icons/bi'
-
+import { SiDatadog } from 'react-icons/si'
 
 
 
@@ -31,13 +31,18 @@ export default function NavBar(props) {
     }, [])
 
     return (
-        <div className={Styles.navBar}>
-            <Link to='/home'>Home</Link>
-            <Link to="/createBreed">Create New Breed</Link>
-            <Link to={`/breeds/${id}`}>Random Breed</Link>
-            <div className={Styles.searchBar}>
-                <input ref={inputRef} placeholder='Search by name' value={input} onChange={e => handleOnChange(e)}></input>
-                <button onClick={e => onSearch(e)}><Link to='/search'  style={{pointerEvents: input === '' ? 'none' : ''}}><BiSearchAlt/></Link></button>
+        <div className={Styles.container}>
+            <div className={Styles.title}>
+                <h2><Link to='/home'><SiDatadog/> Henry's Dogs</Link></h2>
+            </div>
+            <div className={Styles.navBar}>
+                <Link to='/home'>Home</Link>
+                <Link to="/createBreed">Create New Breed</Link>
+                <Link to={`/breeds/${id}`}>Random Breed</Link>
+                <div className={Styles.searchBar}>
+                    <input ref={inputRef} placeholder='Search by name' value={input} onChange={e => handleOnChange(e)}></input>
+                    <button onClick={e => onSearch(e)}><Link to='/search'  style={{pointerEvents: input === '' ? 'none' : ''}}><BiSearchAlt/></Link></button>
+                </div>
             </div>
         </div>
     )
