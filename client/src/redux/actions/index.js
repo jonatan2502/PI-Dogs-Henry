@@ -11,11 +11,13 @@ export const ERROR = 'ERROR'
 export const SEARCH_BY_NAME = 'SEARCH_BY_NAME'
 export const CLEAR_SEARCH = 'CLEAR_SEARCH'
 export const CLEAR_BREEDS = 'CLEAR_BREEDS'
+const { REACT_APP_API } = process.env
+const baseURL = REACT_APP_API || 'http://localhost:3001'
 
 export function getAllBreeds() {
     return async function(dispatch) {
         try {
-            const res = await axios.get('http://localhost:3001/dogs')
+            const res = await axios.get(`${baseURL}/dogs`)
             // console.log(res.data)
             return dispatch({
                 type: GET_ALL_BREEDS,
@@ -33,7 +35,7 @@ export function getAllBreeds() {
 export function getBreed(id) {
     return async function(dispatch) {
         try {
-            const res = await axios.get(`http://localhost:3001/dogs/${id}`)
+            const res = await axios.get(`${baseURL}/dogs/${id}`)
             return dispatch({
                 type: GET_BREED,
                 payload: res.data
@@ -69,7 +71,7 @@ export function getBreed(id) {
 export function getAllTemperaments() {
     return async function(dispatch) {
         try {
-            const res = await axios.get('http://localhost:3001/temperaments')
+            const res = await axios.get(`${baseURL}/temperaments`)
             return dispatch({
                 type: GET_ALL_TEMPERAMENTS,
                 payload: res.data
@@ -110,7 +112,7 @@ export function getFilteredBreeds(temperament) {
     console.log(temperament)
     return async function(dispatch) {
         try {
-            const res = await axios.get('http://localhost:3001/dogs')
+            const res = await axios.get(`${baseURL}/dogs`)
             // const res ={ data: breeds}
             let filteredResp = []
             if (temperament) {
@@ -172,7 +174,7 @@ export function orderBy(order, breeds) {
 export function searchByName(name) {
     return async function(dispatch) {
         try {
-            const res = await axios.get(`http://localhost:3001/dogs?name=${name}`)
+            const res = await axios.get(`${baseURL}/dogs?name=${name}`)
             // console.log(res.data)
             return dispatch({
                 type: SEARCH_BY_NAME,
