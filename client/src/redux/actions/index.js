@@ -109,7 +109,7 @@ export function clearSearch() {
 }
 
 export function getFilteredBreeds(temperament) {
-    console.log(temperament)
+    // console.log(temperament)
     return async function(dispatch) {
         try {
             const res = await axios.get(`${baseURL}/dogs`)

@@ -15,7 +15,7 @@ export default function NavBar(props) {
     const [input, setInput] = useState('')
 
     let id = breeds.length ? breeds[Math.ceil(Math.random() * (breeds.length - 1))].id : 1
-    console.log(breeds)
+    // console.log(breeds)
 
     const onSearch = function (event) {
         dispatch(searchByName(inputRef.current.value))

@@ -1,9 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Styles from './Pagination.module.css'
 import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr'
 
 
-export default function Pagination({ page, setPage, maxPage }) {
+export default function Pagination({ page, setPage, maxPage, breeds }) {
     const [input, setInput] = useState(1)
 
     const nextPage = () => {
@@ -15,6 +15,10 @@ export default function Pagination({ page, setPage, maxPage }) {
         setInput(input - 1)
         setPage(page - 1 )
     }
+
+    useEffect(() => {
+        setInput(1)
+    }, [breeds])
 
     const onKeyDown = (e) => {
         if (e.keyCode == 13) {

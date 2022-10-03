@@ -27,6 +27,10 @@ export default function Home() {
     useEffect(() => {
         dispatch(getAllTemperaments())
     }, [])
+
+    useEffect(() => {
+        setPage(1)
+    }, [breeds])
     
     const handleOrderBy = function(event) {
         const order = event.target.value
@@ -89,7 +93,7 @@ export default function Home() {
                     )
                 }
             </div>
-            <Pagination page={page} setPage={setPage} maxPage={maxPage}></Pagination>
+            <Pagination page={page} setPage={setPage} maxPage={maxPage} breeds={breeds}></Pagination>
         </div>
     )
 }
