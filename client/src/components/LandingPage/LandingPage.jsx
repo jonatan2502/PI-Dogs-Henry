@@ -11,6 +11,7 @@ export default function LandingPage() {
             </video>
             <div className={Styles.welcome}>
                 <h1>Henry's Dogs</h1>
+                <small>Individual Project developed by <a target='_blank' href='https://www.linkedin.com/in/jonatan-piedra-9036ab4b/'>Jonatan Piedra</a> for Henry Bootcamp</small>
                 <Link to='/home' className={Styles.button}><button>Click Here</button></Link>
             </div>
         </div>
