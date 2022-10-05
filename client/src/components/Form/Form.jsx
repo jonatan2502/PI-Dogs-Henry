@@ -8,6 +8,8 @@ import Video from '../../assets/img/production ID_4838318.mp4'
 import Styles from './Form.module.css'
 import { GrFormAdd } from 'react-icons/gr'
 import { BsTrash } from 'react-icons/bs'
+const { REACT_APP_API } = process.env
+const baseURL = REACT_APP_API || 'http://localhost:3001'
 
 
 export default function Form() {
@@ -155,7 +157,7 @@ export default function Form() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const resp = await axios.post('http://localhost:3001/dogs/', breed)
+            const resp = await axios.post(`${baseURL}/dogs/`, breed)
             resetForm()
             alert(resp.data.msg)
         } catch (error) {

@@ -4,7 +4,7 @@ const { Op } = require("sequelize")
 const { API_KEY } = process.env
 const { conn, Raza, Temperamento, RazaTemperamento } = require('../db.js')
 const {
-    getBreeds, getBreedsById, getTemperaments, addBreed
+    getBreeds, getBreedsById, getTemperaments, addBreed, getBreedName
 } = require('./../controllers/index.js')
 
 // Importar todos los routers;
@@ -21,6 +21,7 @@ router.get('/dogs', getBreeds)
 router.get('/dogs/:idRaza', getBreedsById)
 router.get('/temperaments', getTemperaments)
 router.post('/dogs', addBreed)
+router.get('/breedName', getBreedName)
 
 
 module.exports = router;

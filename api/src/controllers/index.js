@@ -6,7 +6,7 @@ const { conn, Raza, Temperamento, RazaTemperamento } = require('../db.js')
 exports.getBreeds = async (req, res) => {
     try {
         const raza = req.query.name
-        //console.log('raza')
+        console.log('raza')
         if (raza) {
             // const response_api = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${raza}&api_key=${API_KEY}`)
             const raw = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
@@ -79,6 +79,22 @@ exports.getBreeds = async (req, res) => {
     }
     }
 
+exports.getBreedName = async (req, res) => {
+    try {
+        const results = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+        const aux = []
+        console.log(results)
+        results.data.forEach(e => {
+            aux.push(e.name)
+        })
+        
+        res.status(200).json(aux)
+
+    } catch (error) {
+        res.status(404).json({'msg': `Oops! Something went wrong.`})
+    }
+}
+
 exports.getBreedsById = async (req, res) => {
     try {
         const { idRaza } = req.params
@@ -117,7 +133,6 @@ exports.getBreedsById = async (req, res) => {
             return response ? res.status(200).json(dog) : res.status(404).json({'msg': `Sorry, your search for ID: <h2>${idRaza}</h2> did not return any results.`})
         }
     } catch (error) {
-        // console.log(error)
         res.status(404).json({'msg': `Sorry, your search for ID: ${req.params.idRaza} did not return any results.`})
     }
 }
@@ -138,7 +153,7 @@ exports.getTemperaments = async (req, res) => {
             })
             const setTemps = new Set(temps)
             const arrTemps = [...setTemps]
-            // console.log(setTemps)
+            
             arrTemps.forEach((e) => Temperamento.create({
                 name: e
             }))
@@ -150,10 +165,9 @@ exports.getTemperaments = async (req, res) => {
 }
 
 exports.addBreed = async (req, res) => {
-    // console.log(req.body)
     try {
         const { name, minHeight, maxHeight, minWeight, maxWeight, minLifespan, maxLifespan, temperaments, image } = req.body
-        //console.log(req.body)
+        
         const exists = await Raza.findOne({
             where: {
                 name: name,
@@ -172,7 +186,6 @@ exports.addBreed = async (req, res) => {
                 image: image,
             })
 
-            //console.log(raza)
             temperaments.forEach( async e => {
                 const temperament = await Temperamento.findOrCreate({
                     where: { name: e },
@@ -180,14 +193,13 @@ exports.addBreed = async (req, res) => {
                         name: e
                     }
                 })
-                //console.log(temperament)
+
                 await raza.addTemperamento(temperament[0], { through: RazaTemperamento })
             })
-            // res.status(201).json(raza)
+
             res.status(201).json({'msg': `The new breed ${name} was successfully created.`})
         } catch (error) {
             res.status(400).json(error)
-            //res.status(400).json({'msg': `Sorry, there was a problem creating your new breed`})
         }
     } catch (error) {
         res.status(404).json({'msg': `Oops! Something went wrong.`})
