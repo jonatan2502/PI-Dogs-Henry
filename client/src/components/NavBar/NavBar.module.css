@@ -1,16 +1,23 @@
 .container {
     display: flex;
+    position: sticky;
     width: 100%;
     justify-content: space-around;
     background-color: #000000;
+    top: 0;
+}
+
+.title {
+    width: 50%;
+    padding-left: 3rem;
 }
 .navBar {
     display: flex;
     /* padding: 2rem 2rem 2rem 2rem; */
-    background-color: #000000;
-    justify-content: flex-end;
+    /* background-color: white; */
+    /* justify-content: flex-end; */
     align-items: center;
-    height: 4.5rem;
+    /* height: 4.5rem; */
     width: 50%;
     text-decoration: none;
     margin: 0;
@@ -18,10 +25,11 @@
 
 
 .navBar a {
-    width: 18%;
+    /* width: 18%; */
     /* height: 8vh; */
     /* height: 100%; */
     /* max-height: 100%; */
+    margin: 0rem 1.5rem 0rem 0rem;
     font-weight: bold;
     align-content: center;
 }
@@ -46,7 +54,7 @@ a:link {
 }
 
 .navBar input {
-    width: 15vw;
+    width: 13vw;
     border-radius: 3px;
     height: 10px;
     padding: 10px 10px 10px 10px;
@@ -56,9 +64,9 @@ a:link {
 
 }
 
-.navBar button {
-    margin-right: 3rem;
-}
+/* .navBar button {
+    margin-right: 1rem;
+} */
 
 .navBar input:focus {
     background-color: #6e7f41;
@@ -69,12 +77,19 @@ a:link {
     color: #F0EAD2
 }
 
+.searchBar {
+    display: flex;
+    align-items: center;
+}
+
 .searchBar a {
     color: #6e7f41;
+    font-size: 36px;
+    /* align-items: center; */
 }
 
 .searchBar a:hover {
-    color: black;
+    color: #F0EAD2;
 }
 
 .title a {

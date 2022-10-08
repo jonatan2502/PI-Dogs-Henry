@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { getAllBreeds, searchByName } from "../../redux/actions";
 import { useEffect, useRef, useState } from "react";
 import Styles from './NavBar.module.css'
-import { BiSearchAlt } from 'react-icons/bi'
+import { IoSearchCircle } from 'react-icons/io5'
 import { SiDatadog } from 'react-icons/si'
 
 
@@ -15,7 +15,6 @@ export default function NavBar(props) {
     const [input, setInput] = useState('')
 
     let id = breeds.length ? breeds[Math.ceil(Math.random() * (breeds.length - 1))].id : 1
-    // console.log(breeds)
 
     const onSearch = function (event) {
         dispatch(searchByName(inputRef.current.value))
@@ -33,7 +32,7 @@ export default function NavBar(props) {
     return (
         <div className={Styles.container}>
             <div className={Styles.title}>
-                <h2><Link to='/home'><SiDatadog/> Henry's Dogs</Link></h2>
+                <h2><Link to='/'><SiDatadog/> Henry's Dogs</Link></h2>
             </div>
             <div className={Styles.navBar}>
                 <Link to='/home'>Home</Link>
@@ -41,7 +40,7 @@ export default function NavBar(props) {
                 <Link to={`/breeds/${id}`}>Random Breed</Link>
                 <div className={Styles.searchBar}>
                     <input ref={inputRef} placeholder='Search by name' value={input} onChange={e => handleOnChange(e)}></input>
-                    <button onClick={e => onSearch(e)}><Link to='/search'  style={{pointerEvents: input === '' ? 'none' : ''}}><BiSearchAlt/></Link></button>
+                    <Link to='/search' style={{pointerEvents: input === '' ? 'none' : ''} }><IoSearchCircle onClick={e => onSearch(e)}/></Link>
                 </div>
             </div>
         </div>

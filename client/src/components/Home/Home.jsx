@@ -4,8 +4,9 @@ import NavBar from "../NavBar/NavBar"
 import Pagination from '../Pagination/Pagination'
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useRef, useState } from "react"
-import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments, searchByName, clearBreeds } from "../../redux/actions"
+import { getAllBreeds, getFilteredBreeds, orderBy, getAllTemperaments } from "../../redux/actions"
 import Loader from "../Loader/Loader"
+import Footer from '../Footer/Footer'
 
 
 export default function Home() {
@@ -45,9 +46,12 @@ export default function Home() {
         orderRef.current.value = 'name_asc'
     }
     if (!breeds.length) return (
-    <div>
+    <div className={Styles.loading}>
         <NavBar></NavBar>
-        <Loader></Loader>
+        <div className={Styles.loaderContainer}>
+            <Loader></Loader>
+        </div>
+        <Footer></Footer>
     </div>
     )
     else return (
@@ -94,6 +98,7 @@ export default function Home() {
                 }
             </div>
             <Pagination page={page} setPage={setPage} maxPage={maxPage} breeds={breeds}></Pagination>
+            <Footer></Footer>
         </div>
     )
 }

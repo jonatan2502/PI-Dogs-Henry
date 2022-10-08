@@ -7,6 +7,7 @@ import defaultImage from '../../assets/img/default_img.jpg'
 import Loader from '../Loader/Loader'
 import NavBar from '../NavBar/NavBar'
 import Image from './../../assets/img/pexels-sam-lion-5732457.jpg'
+import Footer from '../Footer/Footer'
 
 
 
@@ -24,10 +25,13 @@ export default function DogDetail() {
 
     if (!breedDetail.name && !breedDetail.msg) {
         return (
-            <div>
-                <NavBar></NavBar>
+            <div className={Styles.loading}>
+            <NavBar></NavBar>
+            <div className={Styles.loaderContainer}>
                 <Loader></Loader>
             </div>
+        <Footer></Footer>
+    </div>
         )
 
     } else if (breedDetail.msg) {
@@ -36,7 +40,7 @@ export default function DogDetail() {
                 <NavBar></NavBar>
                 <div className={Styles.notFound}>
                     <h2>Not found</h2>
-                    <img src={Image}></img>
+                    <img src={Image} alt='Dog'></img>
                     <small>Error 404</small>
                     <p>{breedDetail.msg}</p>
                     <div className={Styles.options}>
@@ -68,6 +72,7 @@ export default function DogDetail() {
                 <Link to='/home'><button>Back Home</button></Link>
             </div>
         </div>
+        <Footer></Footer>
         </>
     )
 }

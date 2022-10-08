@@ -8,6 +8,7 @@ import Video from '../../assets/img/production ID_4838318.mp4'
 import Styles from './Form.module.css'
 import { GrFormAdd } from 'react-icons/gr'
 import { BsTrash } from 'react-icons/bs'
+import Footer from '../Footer/Footer'
 const { REACT_APP_API } = process.env
 const baseURL = REACT_APP_API || 'http://localhost:3001'
 
@@ -240,6 +241,7 @@ export default function Form() {
                     </video>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

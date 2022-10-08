@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { clearSearch } from "../../redux/actions"
 import DogCard from "../DogCard/DogCard"
 import { Link } from 'react-router-dom'
-import Loader from "../Loader/Loader"
+import Footer from '../Footer/Footer'
 import NavBar from "../NavBar/NavBar"
 import Styles from './Search.module.css'
 import Image from './../../assets/img/pexels-sam-lion-5732457.jpg'
@@ -24,8 +24,9 @@ export default function Search(props) {
             <div className={Styles.notFound}>
                 <NavBar></NavBar>
                 <p>{breeds.data.msg}</p>
-                <img src={Image}></img>
+                <img src={Image} alt='Not Found'></img>
                 <Link to='/home'><button>Back Home</button></Link>
+                <Footer></Footer>
             </div>
         )
     } else return (

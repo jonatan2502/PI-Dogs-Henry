@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
 import { getFilteredBreeds } from "../../redux/actions"
 import DogCard from "../DogCard/DogCard"
+import Footer from "../Footer/Footer"
 import Loader from "../Loader/Loader"
 import NavBar from "../NavBar/NavBar"
 import Pagination from "../Pagination/Pagination"
 import Styles from './ListBreeds.module.css'
+
 
 
 export default function ListBreeds() {
@@ -56,6 +58,7 @@ export default function ListBreeds() {
             <div>
                 <Link to='/home'><button>Back Home</button></Link>
             </div>
+            <Footer></Footer>
         </div>
     )
 }

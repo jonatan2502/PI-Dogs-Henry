@@ -21,7 +21,7 @@ export default function Pagination({ page, setPage, maxPage, breeds }) {
     }, [breeds])
 
     const onKeyDown = (e) => {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             setPage(parseInt(e.target.value))
             if (parseInt(e.target.value) < 1 || parseInt(e.target.value) > maxPage || isNaN(parseInt(e.target.value))) {
                 setPage(1)

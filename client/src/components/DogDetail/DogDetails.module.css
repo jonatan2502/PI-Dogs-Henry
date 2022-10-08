@@ -4,6 +4,13 @@
     align-items: center;
 }
 
+.loading {
+    height: 100vh;
+}
+
+.loaderContainer {
+    height: 80%;
+}
 
 .CardImage {
     width: 100%;
