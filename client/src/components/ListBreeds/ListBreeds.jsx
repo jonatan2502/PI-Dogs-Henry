@@ -33,6 +33,8 @@ export default function ListBreeds() {
 
     if (!breeds.length) return <Loader></Loader>
     else return (
+        <>
+
         <div className={Styles.main}>
             <NavBar></NavBar>
             <div className={Styles.cardsContainer}>
@@ -58,7 +60,8 @@ export default function ListBreeds() {
             <div>
                 <Link to='/home'><button>Back Home</button></Link>
             </div>
-            <Footer></Footer>
         </div>
+        <Footer></Footer>
+        </>
     )
 }

@@ -6,8 +6,7 @@ export default function DogCard(props) {
 
     return (
         <Link className={Styles.link} to={`/breeds/${props.id}`}>
-{            console.log(props.image)
-}            <div className={Styles.cardContainer}>
+            <div className={Styles.cardContainer}>
                     <img className={Styles.cardImage} src={props.image ? props.image : defaultImage} alt='Dog'></img>
                     <section className={Styles.description}>
                         <p><b>Name: </b>{props.name}</p>
